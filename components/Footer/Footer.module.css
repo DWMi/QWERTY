@@ -1,0 +1,32 @@
+.footerCon{
+    height: 304px;
+    background-color: #111010;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+
+.box1Con{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}   
+.box1{
+    /* margin: 00px 0px 40px 211px; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+
+}
+.box2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
