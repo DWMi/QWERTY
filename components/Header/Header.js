@@ -32,7 +32,7 @@ const Header =()=>{
                         CONTACT
                     </Link>
                     <Link className={style.headerLinks}  href='/'>
-                        <AiOutlineShoppingCart style={{ stroke: "black", strokeWidth: "10", fontSize:'40px'}}/>
+                        <AiOutlineShoppingCart style={{ stroke: "black", strokeWidth: "10", fontSize:'20px'}}/>
                     </Link>
                 </div>
             </div>  
