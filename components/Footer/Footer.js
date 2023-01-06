@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {ImFacebook, ImTwitter} from 'react-icons/im'
 import {RiInstagramFill} from 'react-icons/ri'
 import style from './Footer.module.css'
+import Link from 'next/link'
 
 const Footer =()=>{
 
@@ -13,15 +14,15 @@ const Footer =()=>{
                 <div className={style.box1}>
                     <Image src={LOGO}/>
                     <div style={{display:'flex' ,gap:'20px'}} >
-                        <a href='https:\\www.facebook.com'>
+                        <Link href='https:\\www.facebook.com'>
                             <ImFacebook href='www.facebook.com'/>
-                        </a>
-                        <a href='https:\\www.twitter.com'>
-                            <ImTwitter/>
-                        </a>
-                        <a href='https:\\www.instagram.com'>
+                        </Link>
+                        <Link href='https:\\www.twitter.com'>
+                            <ImTwitter/> 
+                        </Link>
+                        <Link href='https:\\www.instagram.com'>
                             <RiInstagramFill/>
-                        </a>
+                        </Link>
                     </div>
                     <p style={{fontSize:'10px', color:'rgba(255, 255, 255, 0.514)'}}>Copyright © 2023 QWERTY | All Rights Reserved.</p>
                 </div>
@@ -34,13 +35,19 @@ const Footer =()=>{
                         Keyboards
                     </li>
                     <li>
+                    <Link href='/'>
                         Switches
+                    </Link>
                     </li>
                     <li>
+                    <Link href='/'>
                         Keycaps
+                    </Link>
                     </li>
                     <li>
+                    <Link href='/'>
                         See All
+                    </Link>
                     </li>
                 </ul>
             </div>
@@ -49,13 +56,19 @@ const Footer =()=>{
                 <br></br>
                 <ul style={{listStyle:'none', display:'flex', gap:'8px', flexDirection:'column', color:'rgba(255, 255, 255, 0.514)'}}>
                     <li>
-                        Shipping Methods
+                        <Link href='/'>
+                            Shipping Methods
+                        </Link>
                     </li>
                     <li>
-                        Shipping Fees
+                        <Link href='/'>
+                            Shipping Fees
+                        </Link>
                     </li>
                     <li>
-                        Warehouse Location
+                        <Link href='/'>
+                            Warehouse Location
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -64,20 +77,16 @@ const Footer =()=>{
                 <br></br>
                 <ul style={{listStyle:'none', display:'flex', gap:'8px', flexDirection:'column'}}>
                     <li>
-                        123 Some Street, 41234, Göteborg, Sweden
+                            123 Some Street, 41234, Göteborg, Sweden
                     </li>
                     <li>
-                        0123456789
+                            0123456789
                     </li>
                     <li>
-                        info@qwerty.com
+                            info@qwerty.com
                     </li>
                 </ul>
             </div>
-            <div>
-                
-            </div>
-
         </div>
     )
 }
