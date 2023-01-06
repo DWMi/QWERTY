@@ -4,20 +4,25 @@ const ProductsSchema = mongoose.Schema(
     {
       sku: {
         type: String,
-        required: true,
+        required: false,
       },
-      name: {
+      Name: {
         type: String,
         required: true,
       },
-      picturePath: String,
-      price: Number,
-      qty: Number,
-      category: String,
+      Brand: {
+        type: String,
+        required: false,
+      },
+      Img1: String,
+      Img2: String,
+      Price: Number,
+      Qty: Number,
+      Category: String,
     },
     { timestamps: true }
   );
   
-  const Product = mongoose.model("Product", ProductsSchema) || mongoose.model('User', ProductsSchema);
+  const Product = mongoose.models.Product || mongoose.model("Product", ProductsSchema);
   
   export default Product;
