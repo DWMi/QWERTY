@@ -1,12 +1,21 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
+import useSWR from 'swr'            
+import fetcher from '../utils/fetcher'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const { data, error } = useSWR('/api/categories/get-all-categories', fetcher)
+
+  console.log(data)
   return (
+
     <>
       <Head>
         <title>Create Next App</title>
@@ -15,6 +24,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+
+
+      {data && data.map((cat) => (
+          <>
+            <Link href={`${cat.name}`} key={cat._id}>
+              <h3>{cat.name}</h3>
+            </Link>
+              {cat.brands && cat.brands.map(brand => (
+                  <Link href={`${cat.name}/${brand}`} key='1'>
+                     {brand}
+                   </Link>
+              ))}
+          </>
+      ))} 
+   
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;

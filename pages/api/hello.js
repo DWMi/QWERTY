@@ -4,11 +4,13 @@ import db from '../../utils/db'
 import Product from '../../models/Product';
 import Category from "../../models/Category";
 import {ProductList} from '../../utils/productsList'
+import {categoryList} from '../../utils/categoryList'
+
 
 
 export default async function handler(req, res) {
   await db.connect();
-  const products = await Product.find({Brand: 'Ducky'})
+  const products = await Category.find()
   await db.disconnect();
 
 

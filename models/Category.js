@@ -6,7 +6,14 @@ const CategorySchema = new mongoose.Schema(
         name: {
           type: String,
           required: true,
-        }
+        },
+        brands: [
+          {
+            brandName: String,
+            img: String
+          }
+        ],
+      
       },
       { timestamps: true }
     );
