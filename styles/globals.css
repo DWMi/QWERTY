@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -85,6 +85,13 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  min-height: calc(100vh - 497px) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -104,4 +111,15 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.dropdown-link {
+  display: flex;
+  padding: 2px;
+  transition: opacity 200ms ease-in-out;
+}
+
+.dropdown-link:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }

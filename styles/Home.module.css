@@ -1,94 +1,95 @@
-.bannerCon{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.bannerCon {
+  position: relative;
 }
-.infoBoxCon{
-    position: absolute;
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    align-items: center;
-    height: 100%;
+.infoBoxCon {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: center;
+  height: 100%;
 }
-.infoBox{
-    position: relative;
-    margin-right:80px;
-    padding:30px;
-    width: 30%;
-    background-color: rgba(0, 0, 0, 0.527);
+.infoBox {
+  position: relative;
+  margin-right: 80px;
+  padding: 30px;
+  width: 30%;
+  background-color: rgba(0, 0, 0, 0.527);
 }
-.contentCon{
-    width: 100%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* padding: 0px 160px; */
+.contentCon {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding: 0px 160px; */
 }
 
-.content{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    /* display: flex;
+.content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* display: flex;
     flex-direction: column; */
-    /* padding: 0px 370px; */
+  /* padding: 0px 370px; */
 }
 
-.brandsCon{
-    
-    grid-column:span 6;
-    /* flex-wrap: wrap;
-    justify-content: center; */
-    gap: 1%;
+.brandsCon {
+  grid-column: span 12;
+  gap: 1%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
 }
-.brandPicCon{
-    margin: 40px 0px;
-    position: relative;
-    /* grid-column:span 6; */
-    /* display: flex;
+.brandPicCon {
+  margin: 40px 0px;
+  position: relative;
+  grid-column: span 6;
+  padding: 0 150px;
+
+  /* display: flex;
     align-items: center;
     justify-content: flex-end; 
     flex-direction: column; */
 }
-.brandInfoBox{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border:solid 1px white;
-    background-color: black;
-    /* width: 90%; */
-    bottom: -15px;
-    gap: 5px;
-    padding: 10px;
+.brandInfoBox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px white;
+  background-color: black;
+  /* width: 90%; */
+  bottom: -15px;
+  gap: 5px;
+  padding: 10px;
 }
 
-.promoBanCon{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    /* padding: 0px 35px; */
-    margin: 40px 0 40px 0;
+.promoBanCon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0px 35px;
+  margin: 40px 0 40px 0;
+  bottom: 0;
+  grid-column: span 12;
 }
-.promoPicCon{
-    position:relative;
-    width: 100%;
-    height: 40%;
+.promoPicCon {
+  position: relative;
+  width: 100%;
+  height: 40%;
+  object-fit: fill;
 }
 
-.promoInfoBox{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    background-color: #F7F7F7;
-    padding: 20px;
-    width: 35%;
-    align-items:flex-start;
+.promoInfoBox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  padding: 20px;
+  width: 35%;
+  align-items: flex-start;
 }
