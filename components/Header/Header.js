@@ -4,6 +4,10 @@ import LOGO from "../../public/brandPic/QWERTYLOGO.svg";
 import Link from "next/link";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Abel } from "@next/font/google";
+import useSWR from "swr";
+import fetcher from "../../utils/fetcher";
+import { useRouter } from "next/router";
+import { BsChevronDown } from "react-icons/bs";
 import { signOut, useSession } from "next-auth/react";
 import { Menu } from "@headlessui/react";
 import DropdownLink from "../Dropdown Link/DropdownLink";
@@ -11,6 +15,9 @@ import DropdownLink from "../Dropdown Link/DropdownLink";
 const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 const Header = () => {
+  
+  const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
+
   const { status, data: session } = useSession();
   console.log(status);
   const logoutHandler = () => {
@@ -23,9 +30,31 @@ const Header = () => {
         <Link style={{ color: "#979797" }} href="/">
           HOME
         </Link>
-        <Link className={style.headerLinks} href="/">
-          BRANDS
-        </Link>
+        <div className={style.centerContainer}>
+          <Link className={style.headerLinks} href="/">
+            PRODUCTS
+            <div className={style.dropDownDiv}>
+              {data &&
+                data.map((cat) => (
+                  <>
+                    <Link
+                      href={`/category/${cat.name}`}
+                      key={cat._id}
+                    >
+                      <h3>{cat.name}</h3>
+                    </Link>
+                    {cat.brands &&
+                      cat.brands.map((brand) => (
+                        <Link href={`/${brand.brandName}`}>
+                          {brand.brandName}
+                        </Link>
+                      ))}
+                  </>
+                ))}
+            </div>
+          </Link>
+          <BsChevronDown />
+        </div>
         <Link className={style.headerLinks} href="/">
           FAQ
         </Link>

@@ -19,6 +19,7 @@ const ProductsSchema = mongoose.Schema(
       Price: Number,
       Qty: Number,
       Category: String,
+      Switches: [String]
     },
     { timestamps: true }
   );
