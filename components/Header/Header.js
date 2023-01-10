@@ -1,6 +1,6 @@
 import style from './Header.module.css'
 import Image from 'next/image'
-import LOGO from "../../public/QWERTYLOGO.svg"
+import LOGO from "../../public/brandPic/QWERTYLOGO.svg"
 import Link from 'next/link'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import { Abel } from '@next/font/google'
