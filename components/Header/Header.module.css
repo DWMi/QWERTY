@@ -11,7 +11,6 @@
   color: rgb(0, 0, 0);
   text-transform: uppercase;
   background: none;
-  color: inherit;
   border: none;
   transition: opacity 200ms ease-in-out;
 }
@@ -40,6 +39,7 @@
   right: 0;
   left: 0;
   width: 150px;
+  color:black;
   box-shadow: black 10px 10px;
   border: 1px black solid;
   padding: 10px;
@@ -47,3 +47,4 @@
   z-index: 1000;
   background-color: white;
 }
+
