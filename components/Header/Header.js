@@ -8,13 +8,21 @@ import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
 import { useRouter } from "next/router";
 import { BsChevronDown } from "react-icons/bs";
+import { signOut, useSession } from "next-auth/react";
+import { Menu } from "@headlessui/react";
+import DropdownLink from "../Dropdown Link/DropdownLink";
 
 const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 const Header = () => {
+  
   const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
-  console.log(data)
 
+  const { status, data: session } = useSession();
+  console.log(status);
+  const logoutHandler = () => {
+    signOut({ callbackUrl: "/login" });
+  };
   return (
     <div className={style.headerCon}>
       <Image src={LOGO} alt="QWERTY LOGO" />
@@ -51,11 +59,40 @@ const Header = () => {
           FAQ
         </Link>
         <Link className={style.headerLinks} href="/">
-          MY ORDERS
-        </Link>
-        <Link className={style.headerLinks} href="/">
           CONTACT
         </Link>
+
+        {status === "loading" ? (
+          "LOADING"
+        ) : session?.user ? (
+          <Menu as="div" className={style.DropdownMenuHeader}>
+            <Menu.Button className={style.headerLinks}>my account</Menu.Button>
+            <Menu.Items className={style.MenuItems}>
+              <Menu.Item>
+                <DropdownLink className="dropdown-link" href="/profile">
+                  Profile
+                </DropdownLink>
+              </Menu.Item>
+              {session.user.isAdmin && (
+                <Menu.Item>
+                  <DropdownLink className="dropdown-link" href="/admin">
+                    Admin Dashboard
+                  </DropdownLink>
+                </Menu.Item>
+              )}
+              <Menu.Item>
+                <a className="dropdown-link" href="#" onClick={logoutHandler}>
+                  Logout
+                </a>
+              </Menu.Item>
+            </Menu.Items>
+          </Menu>
+        ) : (
+          <Link className={style.headerLinks} href="/login">
+            LOGIN
+          </Link>
+        )}
+
         <Link className={style.headerLinks} href="/">
           <AiOutlineShoppingCart
             style={{ stroke: "black", strokeWidth: "10", fontSize: "20px" }}
