@@ -1,4 +1,4 @@
-import LOGO from '../../public/QWERTYLOGO2.svg'
+import LOGO from '../../public/brandPic/QWERTYLOGO2.svg'
 import Image from 'next/image'
 import {ImFacebook, ImTwitter} from 'react-icons/im'
 import {RiInstagramFill} from 'react-icons/ri'
@@ -12,15 +12,15 @@ const Footer =()=>{
         <div className={style.footerCon}>
             <div className={style.box1Con}>
                 <div className={style.box1}>
-                    <Image src={LOGO}/>
+                    <Image src={LOGO} alt='qwerty logo'/>
                     <div style={{display:'flex' ,gap:'20px'}} >
-                        <Link href='https:\\www.facebook.com'>
+                        <Link href='https://www.facebook.com'>
                             <ImFacebook href='www.facebook.com'/>
                         </Link>
-                        <Link href='https:\\www.twitter.com'>
+                        <Link href='https://www.twitter.com'>
                             <ImTwitter/> 
                         </Link>
-                        <Link href='https:\\www.instagram.com'>
+                        <Link href='https://www.instagram.com'>
                             <RiInstagramFill/>
                         </Link>
                     </div>
