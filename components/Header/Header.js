@@ -13,6 +13,7 @@ const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 const Header = () => {
   const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
+  console.log(data)
 
   return (
     <div className={style.headerCon}>
