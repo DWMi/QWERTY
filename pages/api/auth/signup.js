@@ -1,7 +1,8 @@
 import User from "../../../models/User";
 import db from "../../../utils/db";
+import bcryptjs from "bcryptjs";
 
-async function handler(rew, res) {
+async function handler(req, res) {
   if (req.method !== "POST") {
     return;
   }
@@ -13,7 +14,7 @@ async function handler(rew, res) {
     !lastName ||
     !address ||
     !password ||
-    password.trim.length < 5
+    password.trim().length < 5
   ) {
     res.status(422).json({
       message: "Validation error!",
@@ -27,6 +28,27 @@ async function handler(rew, res) {
     await db.disconnect();
     return;
   }
+
+  const newUser = new User({
+    email,
+    firstName,
+    lastName,
+    address,
+    password: bcryptjs.hashSync(password),
+    isAdmin: false,
+  });
+
+  const user = await newUser.save();
+  db.disconnect();
+
+  res.status(201).send({
+    message: "New user registered!",
+    _id: user._id,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    isAdmin: user.isAdmin,
+  });
 }
 
 export default handler;

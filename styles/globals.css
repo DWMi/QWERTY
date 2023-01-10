@@ -112,3 +112,14 @@ a {
     color-scheme: dark;
   }
 }
+
+.dropdown-link {
+  display: flex;
+  padding: 2px;
+  transition: opacity 200ms ease-in-out;
+}
+
+.dropdown-link:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

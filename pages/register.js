@@ -7,6 +7,7 @@ import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { getError } from "../utils/error.js";
 import { useRouter } from "next/router.js";
+import axios from "axios";
 
 export default function Login() {
   const { data: session } = useSession();

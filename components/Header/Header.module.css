@@ -10,6 +10,15 @@
 .headerLinks {
   color: rgb(0, 0, 0);
   text-transform: uppercase;
+  background: none;
+  color: inherit;
+  border: none;
+  transition: opacity 200ms ease-in-out;
+}
+
+.headerLinks:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 .headerLinksCon {
@@ -19,4 +28,22 @@
   gap: 8%;
   justify-content: center;
   align-items: center;
+}
+
+.DropdownMenuHeader {
+  position: relative;
+  display: inline-block;
+}
+
+.MenuItems {
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 150px;
+  box-shadow: black 10px 10px;
+  border: 1px black solid;
+  padding: 10px;
+  margin-top: 10px;
+  z-index: 1000;
+  background-color: white;
 }
