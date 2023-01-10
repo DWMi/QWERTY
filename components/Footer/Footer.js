@@ -14,13 +14,13 @@ const Footer =()=>{
                 <div className={style.box1}>
                     <Image src={LOGO}/>
                     <div style={{display:'flex' ,gap:'20px'}} >
-                        <Link href='https:\\www.facebook.com'>
+                        <Link href='https://www.facebook.com'>
                             <ImFacebook href='www.facebook.com'/>
                         </Link>
-                        <Link href='https:\\www.twitter.com'>
+                        <Link href='https://www.twitter.com'>
                             <ImTwitter/> 
                         </Link>
-                        <Link href='https:\\www.instagram.com'>
+                        <Link href='https://www.instagram.com'>
                             <RiInstagramFill/>
                         </Link>
                     </div>

@@ -8,7 +8,7 @@
     justify-content: space-evenly;
 }
 .headerLinks{
-
+    position: relative;
     color:rgb(0, 0, 0);
 }
 
@@ -20,4 +20,27 @@
     justify-content: center;
     align-items: center;
   
+}
+
+.dropDownDiv  {
+    display: none;
+}
+
+
+.headerLinks:hover > .dropDownDiv {
+    color: black;
+    padding: 20px;
+    display: flex;
+    width: 180px;
+    position: absolute;
+    flex-direction: column;
+    background-color: whitesmoke;
+    border-bottom: 1px solid lightgray;
+    z-index: 999;
+}
+
+.centerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

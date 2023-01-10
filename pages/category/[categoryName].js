@@ -38,7 +38,7 @@ export default function Test({products}) {
 
 export async function getServerSideProps(context) {
 
-  const categoryName = context.query.category
+  const categoryName = context.query.categoryName
 
   await db.connect();
   const products = await Product.find({Category: categoryName}).lean();

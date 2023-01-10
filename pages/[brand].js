@@ -2,12 +2,13 @@ import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import Link from 'next/link'
 import  { useRouter } from 'next/router'
-import db from '../../utils/db'
+import db from '../utils/db'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import useSWR from 'swr'
-import fetcher from '../../utils/fetcher'
-import Product from '../../models/Product'
+import fetcher from '../utils/fetcher'
+import Product from '../models/Product'
+import Image from 'next/image'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +16,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Test({products}) {
     
     const router = useRouter()
-    console.log()
+    console.log(products)
 
     useEffect(() => {
         if (products.length == 0) {
@@ -34,7 +35,11 @@ export default function Test({products}) {
       </Head>
       {products && products.map((prod) => {
       return (
-        <h3>{prod.Name}</h3>
+        <div>
+          <h3>{prod.Name}</h3>
+          <Image src={`/assets/${prod.Img1}`} width={'300'} height={'300'} alt={prod.name} />
+        </div>
+        
       )
     })}
     </>
@@ -43,10 +48,10 @@ export default function Test({products}) {
 
 export async function getServerSideProps(context) {
 
-  const categoryName = context.query.brand
+  const brandName = context.query.brand
 
   await db.connect();
-  const products = await Product.find({Brand: categoryName}).lean();
+  const products = await Product.find({Brand: brandName}).lean();
   return {
     props: {
       products: products.map(db.convertDocToObj),
