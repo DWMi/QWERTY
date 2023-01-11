@@ -12,7 +12,7 @@ import ProductCard from "../components/ProductCard/ProductCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Brands({ products }) {
+export default function BrandsPage({ products }) {
   const router = useRouter();
  
 
@@ -59,7 +59,7 @@ export async function getServerSideProps(context) {
   const brandName = context.query.brand;
 
   await db.connect();
-  const products = await Product.find({ Brand: brandName }).lean();
+  const products = await Product.find({ brand: brandName }).lean();
   return {
     props: {
       products: products.map(db.convertDocToObj),

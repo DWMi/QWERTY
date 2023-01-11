@@ -12,7 +12,7 @@ import Product from "../../models/Product";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Category({ products }) {
+export default function CategoryPage({ products }) {
 
   const router = useRouter();
   console.log(products);
@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
 
   await db.connect();
-  const products = await Product.find({ Category: categoryName }).lean();
+  const products = await Product.find({ category: categoryName }).lean();
   return {
     props: {
       products: products.map(db.convertDocToObj),
