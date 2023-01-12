@@ -11,7 +11,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
-import { extname } from "path";
 
 export default function SingleProduct({ product }) {
   const [selectedSwitch, setSelectedSwitch] = useState("");

@@ -6,20 +6,20 @@ const ProductsSchema = mongoose.Schema(
         type: String,
         required: false,
       },
-      Name: {
+      name: {
         type: String,
         required: true,
       },
-      Brand: {
+      brand: {
         type: String,
         required: false,
       },
-      Img1: String,
-      Img2: String,
-      Price: Number,
-      Qty: Number,
-      Category: String,
-      Switches: [String]
+      img1: String,
+      img2: String,
+      price: Number,
+      qty: Number,
+      category: String,
+      switches: [String]
     },
     { timestamps: true }
   );

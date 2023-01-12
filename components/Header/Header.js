@@ -41,11 +41,11 @@ const Header = () => {
                       href={`/category/${cat.name}`}
                       key={cat._id}
                     >
-                      <h3>{cat.name}</h3>
+                      <h3 key={cat.name}>{cat.name}</h3>
                     </Link>
                     {cat.brands &&
                       cat.brands.map((brand) => (
-                        <Link href={`/${brand.brandName}`}>
+                        <Link href={`/${brand.brandName}`} key={brand._id}>
                           {brand.brandName}
                         </Link>
                       ))}
