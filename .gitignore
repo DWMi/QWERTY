@@ -26,9 +26,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-git rm env.local --cached
-git rm env.staging --cached
-git commit -m "Stopped tracking env.local, and env.staging"
+.env.local
+.env
+.env
 
 # vercel
 .vercel
