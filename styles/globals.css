@@ -40,6 +40,9 @@
   --card-border-rgb: 131, 134, 135;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -123,3 +126,4 @@ a {
   cursor: pointer;
   opacity: 0.5;
 }
+

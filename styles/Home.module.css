@@ -13,7 +13,7 @@
   position: relative;
   margin-right: 80px;
   padding: 30px;
-  width: 30%;
+  width: 50%;
   background-color: rgba(0, 0, 0, 0.527);
 }
 .contentCon {
@@ -134,8 +134,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    
 }
-
+.catPics{
+    width: 100%;
+    height: 100%;
+}
 .contactUsBanCon{
     width: 100%;
     display: flex; 
@@ -185,6 +190,7 @@
     .brandInfoBox {
         width: 80%;
     }
+    
     .brandPicCon{
         padding: 0 10px;
     }
@@ -203,11 +209,14 @@
     .promoInfoCon{
         left: 4%;
     }
-
+    .infoBoxText{
+        font-size: 11px;
+        margin-top: 5px;
+    }   
     .infoBox{
-
-        margin: 0;
-        width: 100%;
+        margin-right: 20px;
+        width: 50%;
+        padding: 5px;
     }
     .contactText{
         padding: 40px;
@@ -235,8 +244,15 @@
         padding:30px; 
         width: 70%;
     }
-
-   
+    .infoBox{
+        margin-right: 20px;
+        width: 70%;
+        padding: 5px;
+    }
+    .infoBoxText{
+        font-size: 10px;
+        margin-top: 5px;
+    }   
     .contactTextCon{
         right: -10%;	
     }
@@ -265,6 +281,15 @@
     .promoBanCon {
         padding: 10px;
     }
+    .infoBox{
+        margin-right: 20px;
+        width: 70%;
+        padding: 5px;
+    }
+    .infoBoxText{
+        font-size: 8px;
+        margin-top: 5px;
+    }   
     .promoInfoBox{
         width: 40%;
         height: 88%;

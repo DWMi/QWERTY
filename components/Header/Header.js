@@ -9,8 +9,11 @@ import fetcher from "../../utils/fetcher";
 import { useRouter } from "next/router";
 import { BsChevronDown } from "react-icons/bs";
 import { signOut, useSession } from "next-auth/react";
+import {useEffect, useState} from 'react'
 import { Menu } from "@headlessui/react";
 import DropdownLink from "../Dropdown Link/DropdownLink";
+import HamburgerMenu from "../Hamburger/Hamburger";
+import { useMediaQuery } from "@mui/material";
 
 const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
@@ -21,17 +24,21 @@ const Header = () => {
   const { status, data: session } = useSession();
   console.log(status);
   const logoutHandler = () => {
-    signOut({ callbackUrl: "/login" });
+    signOut({ callbackUrl: "/" });
   };
+  const isTabletOrPhone = useMediaQuery("(max-width:590px)")
+  console.log(isTabletOrPhone)
   return (
     <div className={style.headerCon}>
       <Image src={LOGO} alt="QWERTY LOGO" />
+      { !isTabletOrPhone  ? 
+      
       <div className={`${style.headerLinksCon} ${fontStyle.className}`}>
         <Link style={{ color: "#979797" }} href="/">
           HOME
         </Link>
         <div className={style.centerContainer}>
-          <Link className={style.headerLinks} href="/">
+          <div className={style.headerLinks} >
             PRODUCTS
             <div className={style.dropDownDiv}>
               {data &&
@@ -52,7 +59,7 @@ const Header = () => {
                   </>
                 ))}
             </div>
-          </Link>
+          </div>
           <BsChevronDown />
         </div>
         <Link className={style.headerLinks} href="/">
@@ -99,6 +106,9 @@ const Header = () => {
           />
         </Link>
       </div>
+       :
+       <HamburgerMenu data={data} />
+      }
     </div>
   );
 };
