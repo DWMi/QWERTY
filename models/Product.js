@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const ProductsSchema = mongoose.Schema(
     {
@@ -21,9 +21,12 @@ const ProductsSchema = mongoose.Schema(
       category: String,
       switches: [String]
     },
-    { timestamps: true }
-  );
-  
-  const Product = mongoose.models.Product || mongoose.model("Product", ProductsSchema);
-  
-  export default Product;
+   
+
+  { timestamps: true }
+);
+
+const Product =
+  mongoose.models.Product || mongoose.model("Product", ProductsSchema);
+
+export default Product;

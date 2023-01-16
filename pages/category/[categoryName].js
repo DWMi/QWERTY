@@ -9,7 +9,6 @@ import Image from "next/image";
 import BANNER from "../../public/brandPic/landingBanner.png";
 import Product from "../../models/Product";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default function CategoryPage({ products }) {
@@ -42,9 +41,7 @@ export default function CategoryPage({ products }) {
         <div className={s.container}>
           {products &&
             products.map((prod) => {
-              return (
-                <ProductCard prod={prod}/>
-              );
+              return <ProductCard prod={prod} />;
             })}
         </div>
       </div>
