@@ -96,6 +96,7 @@
 }
 .bannerTitle{
     color:black;
+    margin: 10px;
 }
 .promoInfoCon{
     display: flex;
@@ -204,7 +205,8 @@
         font-size: 17px;
     }
     .bannerTitle{
-        font-size:20px;
+        font-size:18px;
+        margin: 5px;
     }
     .promoInfoCon{
         left: 4%;

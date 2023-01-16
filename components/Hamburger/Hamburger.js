@@ -11,18 +11,18 @@ const HamburgerMenu = (props) => {
                 width={"auto"}
                 className="left-0 top-12"
             >
-            <Link style={{ color: "#979797" }} href="/">
+            <Link style={{ margin:'0', color: "#FFFFFF" }} href="/">
                 HOME
             </Link>
-            <div >
-                <div style={{fontStyle:'10px'}}>
+            <div style={{display:'flex', marginBottom:'5px', flexDirection:'column'}} >
+                <div style={{fontStyle:'10px',color: "#FFFFFF"}}>
                     PRODUCTS:
                 </div>
                 {data &&
                 data.map((cat) => (
                     <>
-                    <Link href={`/category/${cat.name}`} key={cat._id}>
-                        <h3 key={cat.name}>{cat.name}</h3>
+                    <Link style={{marginLeft:'10px',marginTop:'20px', color:'#bdc3c7', fontWeight:'bold'}} href={`/category/${cat.name}`} key={cat._id}>
+                        <h3 key={cat.name}>All {cat.name}</h3>
                     </Link>
                     {cat.brands &&
                         cat.brands.map((brand) => (
@@ -33,8 +33,8 @@ const HamburgerMenu = (props) => {
                     </>
                 ))}
             </div>
-            <Link href="/">FAQ</Link>
-            <Link href="/">CONTACT</Link>
+            <Link style={{ margin:'0', color: "#FFFFFF" }} href="/">FAQ</Link>
+            <Link style={{ margin:'0', color: "#FFFFFF" }} href="/">CONTACT</Link>
         </Menu>
         </div>
     </div>
