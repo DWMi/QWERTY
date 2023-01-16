@@ -13,7 +13,7 @@
   position: relative;
   margin-right: 80px;
   padding: 30px;
-  width: 30%;
+  width: 50%;
   background-color: rgba(0, 0, 0, 0.527);
 }
 .contentCon {
@@ -126,18 +126,24 @@
   margin: 20px;
 }
 
-.bsPicCon {
-  /* grid-column: span 2; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.bsPicCon{
+    
+    /* grid-column: span 2; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
 }
-
-.contactUsBanCon {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 40px;
+.catPics{
+    width: 100%;
+    height: 100%;
+}
+.contactUsBanCon{
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    margin: 40px;
 }
 .contactUs {
   width: 80%;
@@ -177,63 +183,77 @@
   color: white;
 }
 /* ------------------MQ------------------------------ */
-@media screen and (max-width: 930px) {
-  .brandInfoBox {
-    width: 80%;
-  }
-  .brandPicCon {
-    padding: 0 10px;
-  }
-  .promoPicCon {
-    width: 100%;
-  }
-  .promoInfoBox {
-    width: 50%;
-  }
-  .bannerText {
-    font-size: 17px;
-  }
-  .bannerTitle {
-    font-size: 20px;
-  }
-  .promoInfoCon {
-    left: 4%;
-  }
-
-  .infoBox {
-    margin: 0;
-    width: 100%;
-  }
-  .contactText {
-    padding: 40px;
-    width: 50%;
-  }
-  .contactText > h1 {
-    font-size: 20px;
-  }
-  .contactText > p {
-    font-size: 15px;
-  }
+@media screen and (max-width: 930px){
+  
+    .brandInfoBox {
+        width: 80%;
+    }
+    
+    .brandPicCon{
+        padding: 0 10px;
+    }
+    .promoPicCon{
+        width: 100%;
+    }
+    .promoInfoBox{
+        width: 50%;
+    }
+    .bannerText{
+        font-size: 17px;
+    }
+    .bannerTitle{
+        font-size:20px;
+    }
+    .promoInfoCon{
+        left: 4%;
+    }
+    .infoBoxText{
+        font-size: 11px;
+        margin-top: 5px;
+    }   
+    .infoBox{
+        margin-right: 20px;
+        width: 50%;
+        padding: 5px;
+    }
+    .contactText{
+        padding: 40px;
+        width: 50%;
+    }
+    .contactText >h1{
+        font-size: 20px;
+    }
+    .contactText > p{
+        
+        font-size: 15px;
+    }
 }
 
-@media screen and (max-width: 520px) {
-  .bannerText {
-    font-size: 12px;
-  }
-  .bannerTitle {
-    font-size: 16px;
-  }
-  .promoInfoCon {
-    left: 7%;
-  }
-  .contactText {
-    padding: 30px;
-    width: 70%;
-  }
-
-  .contactTextCon {
-    right: -10%;
-  }
+@media screen and (max-width: 520px){
+    .bannerText{
+        font-size: 12px;
+    }
+    .bannerTitle{
+        font-size:16px;
+    }
+    .promoInfoCon{
+        left: 7%;
+    } .contactText{
+        padding:30px; 
+        width: 70%;
+    }
+    .infoBox{
+        margin-right: 20px;
+        width: 70%;
+        padding: 5px;
+    }
+    .infoBoxText{
+        font-size: 10px;
+        margin-top: 5px;
+    }   
+    .contactTextCon{
+        right: -10%;	
+    }
 
   .contactText > h1 {
     font-size: 18px;
@@ -247,39 +267,51 @@
   }
 }
 
-@media screen and (max-width: 378px) {
-  .brandPicCon {
-    padding: 0 10px;
-  }
-  .promoPicCon {
-    width: 100%;
-  }
-  .promoBanCon {
-    padding: 10px;
-  }
-  .promoInfoBox {
-    width: 40%;
-    height: 88%;
-  }
-  .bannerText {
-    font-size: 8px;
-  }
-  .bannerTitle {
-    font-size: 10px;
-  }
-  .promoInfoCon {
-    left: 3%;
-  }
-  .contactText {
-    width: 70%;
-  }
-  .contactText > h1 {
-    font-size: 18px;
-  }
-  .contactText > p {
-    font-size: 10px;
-  }
-  .contactTextCon {
-    right: -9%;
-  }
+@media screen and (max-width: 378px){
+  
+    .brandPicCon{
+        padding:0 10px;
+    }
+    .promoPicCon{
+        width: 100%;
+    }
+    .promoBanCon {
+        padding: 10px;
+    }
+    .infoBox{
+        margin-right: 20px;
+        width: 70%;
+        padding: 5px;
+    }
+    .infoBoxText{
+        font-size: 8px;
+        margin-top: 5px;
+    }   
+    .promoInfoBox{
+        width: 40%;
+        height: 88%;
+    }
+    .bannerText{
+        font-size: 8px;
+    }
+    .bannerTitle{
+        font-size:10px;
+    }
+    .promoInfoCon{
+        left: 3%;
+    }
+    .contactText{
+        width: 70%;
+    }
+    .contactText >h1{
+        font-size: 18px;
+    }
+    .contactText > p{
+        
+        font-size: 10px;
+    }
+    .contactTextCon{
+        right: -9%;
+    }
+
 }

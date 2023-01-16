@@ -9,8 +9,11 @@ import fetcher from "../../utils/fetcher";
 import { useRouter } from "next/router";
 import { BsChevronDown } from "react-icons/bs";
 import { signOut, useSession } from "next-auth/react";
+import {useEffect, useState} from 'react'
 import { Menu } from "@headlessui/react";
 import DropdownLink from "../Dropdown Link/DropdownLink";
+import HamburgerMenu from "../Hamburger/Hamburger";
+import { useMediaQuery } from "@mui/material";
 
 const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
@@ -20,11 +23,15 @@ const Header = () => {
   const { status, data: session } = useSession();
   console.log(status);
   const logoutHandler = () => {
-    signOut({ callbackUrl: "/login" });
+    signOut({ callbackUrl: "/" });
   };
+  const isTabletOrPhone = useMediaQuery("(max-width:590px)")
+  console.log(isTabletOrPhone)
   return (
     <div className={style.headerCon}>
       <Image src={LOGO} alt="QWERTY LOGO" />
+      { !isTabletOrPhone  ? 
+      
       <div className={`${style.headerLinksCon} ${fontStyle.className}`}>
         <Link className={style.headerLinks} href="/">
           HOME
@@ -114,6 +121,9 @@ const Header = () => {
           />
         </Link>
       </div>
+       :
+       <HamburgerMenu data={data} />
+      }
     </div>
   );
 };
