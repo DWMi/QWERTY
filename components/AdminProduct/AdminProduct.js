@@ -39,6 +39,7 @@ const AdminProduct = (props) => {
   const [category, setCategory] = React.useState("");
 
   useEffect(() => {
+    //hello
     router.push("/admin/products");
     setName("");
     setPrice("");
