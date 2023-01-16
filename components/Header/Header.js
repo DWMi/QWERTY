@@ -18,7 +18,6 @@ import { useMediaQuery } from "@mui/material";
 const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 const Header = () => {
-  
   const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
 
   const { status, data: session } = useSession();
@@ -34,34 +33,47 @@ const Header = () => {
       { !isTabletOrPhone  ? 
       
       <div className={`${style.headerLinksCon} ${fontStyle.className}`}>
-        <Link style={{ color: "#979797" }} href="/">
+        <Link className={style.headerLinks} href="/">
           HOME
         </Link>
-        <div className={style.centerContainer}>
-          <div className={style.headerLinks} >
-            PRODUCTS
-            <div className={style.dropDownDiv}>
-              {data &&
-                data.map((cat) => (
-                  <>
-                    <Link
+
+        <Menu as="div" className={style.DropdownMenuHeader}>
+          <div className={style.centerContainer}>
+            <Menu.Button className={style.headerLinksProd}>
+              products
+            </Menu.Button>
+            <BsChevronDown></BsChevronDown>
+          </div>
+          <Menu.Items className={style.MenuItems}>
+            {data &&
+              data.map((cat) => (
+                <>
+                  <Menu.Item>
+                    <DropdownLink
+                      className="dropdown-link"
                       href={`/category/${cat.name}`}
                       key={cat._id}
                     >
-                      <h3 key={cat.name}>{cat.name}</h3>
-                    </Link>
-                    {cat.brands &&
-                      cat.brands.map((brand) => (
-                        <Link href={`/${brand.brandName}`} key={brand._id}>
-                          {brand.brandName}
-                        </Link>
-                      ))}
-                  </>
-                ))}
-            </div>
-          </div>
-          <BsChevronDown />
-        </div>
+                      <h3 className={style.CategoryTitle}>{cat.name}</h3>
+                    </DropdownLink>
+                  </Menu.Item>
+
+                  {cat.brands &&
+                    cat.brands.map((brand) => (
+                      <Menu.Item>
+                        <DropdownLink
+                          className="dropdown-link"
+                          href={`/${brand.brandName}`}
+                          key={brand.brandName}
+                        >
+                          <p className={style.BrandsTitle}>{brand.brandName}</p>
+                        </DropdownLink>
+                      </Menu.Item>
+                    ))}
+                </>
+              ))}
+          </Menu.Items>
+        </Menu>
         <Link className={style.headerLinks} href="/">
           FAQ
         </Link>
@@ -82,7 +94,10 @@ const Header = () => {
               </Menu.Item>
               {session.user.isAdmin && (
                 <Menu.Item>
-                  <DropdownLink className="dropdown-link" href="/admin">
+                  <DropdownLink
+                    className="dropdown-link"
+                    href="/admin/dashboard"
+                  >
                     Admin Dashboard
                   </DropdownLink>
                 </Menu.Item>
