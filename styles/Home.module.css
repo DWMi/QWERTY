@@ -183,6 +183,20 @@
   border: none;
   color: white;
 }
+
+.brandPic:hover{
+  transform: scale(1.02);
+  box-shadow: 10px 10px black;
+  transform-origin: bottom;
+}
+.brandPic{
+  width: 100%;
+  height: 100%;
+  transition: all 200ms ease-in-out;
+  
+  
+}
+
 /* ------------------MQ------------------------------ */
 @media screen and (max-width: 930px){
   

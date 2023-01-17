@@ -59,7 +59,6 @@ const Landing = ({products, categories}) => {
         </p>
         <div className={styles.content}>
           <div className={styles.brandsCon}>
-         
           {categories &&
                 categories.map((cat) => (
                   
@@ -72,8 +71,10 @@ const Landing = ({products, categories}) => {
                           <Link href={`/${brand.brandName}`} className={styles.brandPicCon}>  
                           
                             <Image
+                            priority
+                            eager 
                             src={`/brandPic/${brand.img}`}
-                            style={{ width: "100%", height: "100%" }}
+                            className={styles.brandPic}
                             alt="brand name"
                             width={100}
                             height={100} />

@@ -29,7 +29,9 @@ const Header = () => {
   console.log(isTabletOrPhone)
   return (
     <div className={style.headerCon}>
+    <Link href="/">
       <Image src={LOGO} alt="QWERTY LOGO" />
+    </Link>
       { !isTabletOrPhone  ? 
       
       <div className={`${style.headerLinksCon} ${fontStyle.className}`}>
@@ -74,7 +76,7 @@ const Header = () => {
               ))}
           </Menu.Items>
         </Menu>
-        <Link className={style.headerLinks} href="/">
+        <Link className={style.headerLinks} href="/faq">
           FAQ
         </Link>
         <Link className={style.headerLinks} href="/">

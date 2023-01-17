@@ -29,13 +29,6 @@ export default function CategoryPage({ products }) {
           <Image src={BANNER} style={{ height: "100%", objectFit: "cover" }} />
           <div className={s.bannerText}>
             <h1 className={s.headerText}>{router.query.categoryName}</h1>
-            <p>
-              Welcome to our keyboard reseller company! We are dedicated to
-              providing our
-              <br />
-              customers with a wide selection of top-quality keyboard products
-              at competitive prices
-            </p>
           </div>
         </div>
         <div className={s.container}>

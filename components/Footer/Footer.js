@@ -20,7 +20,7 @@ const Footer =()=>{
                 <div className={style.box1Con}>
                     <div className={style.box1}>
                         <Image src={LOGO} alt='qwerty logo'/>
-                        <div style={{display:'flex' ,gap:'20px', color:'white'}} >
+                        <div style={{display:'flex', margin:'10px' ,gap:'20px', color:'white'}} >
                             <Link href='https://www.facebook.com'>
                                 <ImFacebook href='www.facebook.com'/>
                             </Link>
