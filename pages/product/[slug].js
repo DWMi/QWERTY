@@ -49,10 +49,6 @@ export default function SingleProduct({ product }) {
         <div className={s.productInfoDiv}>
           <h3 style={{ fontSize: "50px", margin: "0" }}>{product.name}</h3>
           <h4 style={{ fontSize: "30px", margin: "0" }}>{product.price} SEK</h4>
-          <p>
-            Welcome to our keyboard reseller company! We are dedicated to
-            providing our
-          </p>
           <div className={s.productSelectDiv}>
             {product.switches.length ? 
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">

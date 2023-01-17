@@ -59,7 +59,6 @@ const Landing = ({products, categories}) => {
         </p>
         <div className={styles.content}>
           <div className={styles.brandsCon}>
-         
           {categories &&
                 categories.map((cat) => (
                   
@@ -72,8 +71,10 @@ const Landing = ({products, categories}) => {
                           <Link href={`/${brand.brandName}`} className={styles.brandPicCon}>  
                           
                             <Image
+                            priority
+                            eager 
                             src={`/brandPic/${brand.img}`}
-                            style={{ width: "100%", height: "100%" }}
+                            className={styles.brandPic}
                             alt="brand name"
                             width={100}
                             height={100} />
@@ -103,7 +104,6 @@ const Landing = ({products, categories}) => {
             <div className={styles.promoInfoCon}>
                 <div className={styles.promoInfoBox}>
                 <h1 className={styles.bannerTitle}>New Year deal</h1>
-                <br />
                 <p className={styles.bannerText}>
                     Limited time offer! Use code: NEWYEAR and get 20%
                     off your entire order!  Offer expires March 1st, shop now
@@ -135,7 +135,7 @@ const Landing = ({products, categories}) => {
             </div>
             <div className={styles.contactUsBanCon}>
                 <div className={styles.contactUs}>
-                    <Image src={contactUs} width={550} height={350}/>
+                    <Image src={contactUs} width={550} height={350} alt={'Contact us'}/>
                     <div className={styles.contactTextCon}>
                         <div className={styles.contactText}>
                             <h1 style={{color:'black', fontWeight:'lighter'}}> Need Help?</h1>
