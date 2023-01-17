@@ -13,6 +13,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import AdminProduct from "../../components/AdminProduct/AdminProduct.js";
+import AddNewProduct from "../../components/AddNewProduct/AddNewProduct";
+import DeleteProduct from "../../components/DeleteProduct/DeleteProduct.js";
 
 export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
@@ -38,17 +40,45 @@ export default function Products({ products }) {
   }, []);
   const [selectedProduct, setSelectedProduct] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [openAdd, setOpenAdd] = React.useState(false);
+  const [openDelete, setOpenDelete] = React.useState(false);
   const handleOpen = (prod) => {
     setOpen(true);
+    setSelectedProduct(prod);
+  };
+  const handleOpenNew = (product) => {
+    setOpenAdd(true);
+  };
+
+  const handleOpenDelete = (prod) => {
+    setOpenDelete(true);
     setSelectedProduct(prod);
   };
   const handleClose = () => {
     router.push("/admin/products");
     setOpen(false);
+    setOpenAdd(false);
+    setOpenDelete(false);
   };
   return (
     <>
       <div className={styles.AdminDashboardContainer}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            width: "80%",
+          }}
+        >
+          <button
+            className={styles.AdminButton}
+            type="submit"
+            onClick={() => handleOpenNew()}
+          >
+            Add product
+          </button>
+        </div>
         <AdminRow></AdminRow>
         {products &&
           products.map((prod) => {
@@ -76,19 +106,33 @@ export default function Products({ products }) {
                   ></BsFillGearFill>
                 </div>
                 <div className={styles.AdminProductRowSingleElementIcon}>
-                  <BsFillTrashFill style={{ color: "red" }}></BsFillTrashFill>
+                  <BsFillTrashFill
+                    onClick={() => handleOpenDelete(prod)}
+                    style={{ color: "red", cursor: "pointer" }}
+                  ></BsFillTrashFill>
                 </div>
               </div>
             );
           })}
       </div>
-
       <AdminProduct
         product={selectedProduct}
         handleClose={handleClose}
         open={open}
         setOpen={setOpen}
       ></AdminProduct>
+      <AddNewProduct
+        handleClose={handleClose}
+        openAdd={openAdd}
+        setOpenAdd={setOpenAdd}
+      ></AddNewProduct>
+      <DeleteProduct
+        product={selectedProduct}
+        handleClose={handleClose}
+        openDelete={openDelete}
+        setOpenDelete={setOpenDelete}
+      ></DeleteProduct>
+      ;
     </>
   );
 }
