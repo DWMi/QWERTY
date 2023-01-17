@@ -94,8 +94,9 @@
 .bannerText {
   color: black;
 }
-.bannerTitle {
-  color: black;
+.bannerTitle{
+    color:black;
+    margin: 10px;
 }
 .promoInfoCon {
   display: flex;
@@ -182,6 +183,20 @@
   border: none;
   color: white;
 }
+
+.brandPic:hover{
+  transform: scale(1.02);
+  box-shadow: 10px 10px black;
+  transform-origin: bottom;
+}
+.brandPic{
+  width: 100%;
+  height: 100%;
+  transition: all 200ms ease-in-out;
+  
+  
+}
+
 /* ------------------MQ------------------------------ */
 @media screen and (max-width: 930px){
   
@@ -202,7 +217,8 @@
         font-size: 17px;
     }
     .bannerTitle{
-        font-size:20px;
+        font-size:18px;
+        margin: 5px;
     }
     .promoInfoCon{
         left: 4%;

@@ -1,10 +1,8 @@
 
 .bm-burger-button {
-  
     width: 36px;
     height: 30px;
     left: 36px;
-
     top: 36px;
   }
   
@@ -23,24 +21,27 @@
   }
   
   .bm-cross {
-    background: #bdc3c7;
+    background: #FF5C00;
   }
   
-  .bm-menu-wrap {
-    position: fixed;
-    height: 100%;
-  }
+
   
   .bm-menu {
-    background: #373a47;
+    background: #000000f3;
     padding: 0.3rem 0.3rem 0;
     font-size: 1.15em;
+    width:100%; 
+    display: flex!important;
+    justify-content: center!important;
+    gap: 10%;
+    flex-direction: column;
   }
   .bm-menu-wrap{
-    position: fixed;
+ 
+    position: fixed!important;
     right: inherit;
     z-index: 1100;
-    width: auto;
+    width: 50vw!important ;
     top:0%;
     height: 100%;
     transition: all 0.5s ease 0s;
@@ -48,12 +49,16 @@
   .bm-morph-shape {
     fill: #373a47;
   }
-  
-  .bm-item-list {
 
+  .bm-item-list {
+    display: flex;
+    flex-direction: column;
     color: #b8b7ad;
     padding: 0.8em;
+    gap: 20px;
+    
   }
+
   
   .bm-item {
     display: inline-block;
@@ -66,4 +71,8 @@
   .bm-item-list a {
     display: flex;
     flex-direction: column;
+    margin: 2px;
+    margin-left: 15px;
+
   }
+

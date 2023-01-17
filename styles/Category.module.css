@@ -36,3 +36,10 @@
 .headerText {
     font-size: 60px;
 }
+@media screen and (max-width: 520px){
+
+    .bannerText {
+
+        left: 50px;
+    }
+}
