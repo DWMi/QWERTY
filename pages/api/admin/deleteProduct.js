@@ -1,3 +1,4 @@
+import { Prosto_One } from "@next/font/google";
 import Product from "../../../models/Product";
 import db from "../../../utils/db";
 
@@ -11,23 +12,13 @@ async function handler(req, res) {
         });
         return;
     }  */
-  const { _id, name, brand, img1, img2, price, qty, category } = req.body;
-
-  const newProd = {
-    name: name,
-    brand: brand,
-    price: price,
-    img1: img1,
-    img2: img2,
-    qty: qty,
-    category: category,
-    switches: ["mx red", "mx blue", "mx black", "mx brown"],
-  };
+  const { _id } = req.body;
+  const filter = { _id: _id };
   await db.connect();
-  const updateProd = await Product.create(newProd);
+  const deleteProd = await Product.findOneAndDelete(filter);
   db.disconnect();
-  console.log(updateProd);
-  res.json(req.body);
+  console.log(deleteProd);
+  res.json(deleteProd);
 
   /*   return res.status(200)({
     message: "Product saved",
