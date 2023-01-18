@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import AdminProduct from "../../components/AdminProduct/AdminProduct.js";
 import AddNewProduct from "../../components/AddNewProduct/AddNewProduct";
 import DeleteProduct from "../../components/DeleteProduct/DeleteProduct.js";
+import AddNewBrand from "../../components/AddNewBrand/AddNewBrand";
 
 export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
@@ -38,28 +39,39 @@ export default function Products({ products }) {
       //make unauthorized page later
     }
   }, []);
+
   const [selectedProduct, setSelectedProduct] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [openAdd, setOpenAdd] = React.useState(false);
+  const [openBrand, setOpenBrand] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
+
   const handleOpen = (prod) => {
     setOpen(true);
     setSelectedProduct(prod);
   };
+
   const handleOpenNew = (product) => {
     setOpenAdd(true);
+  };
+
+  const handleOpenBrand = (product) => {
+    setOpenBrand(true);
   };
 
   const handleOpenDelete = (prod) => {
     setOpenDelete(true);
     setSelectedProduct(prod);
   };
+
   const handleClose = () => {
     router.push("/admin/products");
     setOpen(false);
     setOpenAdd(false);
     setOpenDelete(false);
+    setOpenBrand(false);
   };
+
   return (
     <>
       <div className={styles.AdminDashboardContainer}>
@@ -71,6 +83,13 @@ export default function Products({ products }) {
             width: "80%",
           }}
         >
+          <button
+            className={styles.AdminButton}
+            type="submit"
+            onClick={() => handleOpenBrand()}
+          >
+            Add Brand
+          </button>
           <button
             className={styles.AdminButton}
             type="submit"
@@ -126,6 +145,11 @@ export default function Products({ products }) {
         openAdd={openAdd}
         setOpenAdd={setOpenAdd}
       ></AddNewProduct>
+      <AddNewBrand
+        handleClose={handleClose}
+        openBrand={openBrand}
+        setOpenBrand={setOpenBrand}
+      ></AddNewBrand>
       <DeleteProduct
         product={selectedProduct}
         handleClose={handleClose}
