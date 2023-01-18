@@ -73,17 +73,7 @@ const HamburgerMenu = (props) => {
     </div>
   );
 };
-const blurPage =()=>{
-    const conGet = document.querySelector('.container')
-    const blurryDiv = document.createElement('div')
-    conGet.insertBefore(blurryDiv, conGet.firstElementChild)
-    blurryDiv.style.backgroundColor = '#000000f3'
-    blurryDiv.style.height =' 100%'
-    blurryDiv.style.width =' 100%'
-    blurryDiv.style.zIndex ='100'
-    blurryDiv.style.position ='absolute'
-    
-  }
+
 const HamburgerIcon = () => (
 
     <div className="p-1/2" style={{color:'black'}}>
