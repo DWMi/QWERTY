@@ -133,17 +133,7 @@ const Header = () => {
                 LOGIN
               </Link>
             )}
-
-            <Link className={style.headerLinks} href="/">
-              <AiOutlineShoppingCart
-                style={{ stroke: "black", strokeWidth: "10", fontSize: "20px" }}
-              />
-            </Link>
-          </div>
-        ) : (
-          <HamburgerMenu data={data} />
-        )}
-        <Link className={style.headerLinks} href="/checkout">
+            <Link className={style.headerLinks} href="/checkout">
           <div style={{ display: "flex", flexDirection: "row" }}>
             <AiOutlineShoppingCart
               style={{
@@ -175,6 +165,12 @@ const Header = () => {
             ) : null}
           </div>
         </Link>
+
+          </div>
+        ) : (
+          <HamburgerMenu totalCartItems={totalCartItems} data={data} />
+        )}
+        
       </div>
   );
 };

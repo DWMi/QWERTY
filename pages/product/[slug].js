@@ -45,8 +45,7 @@ export default function SingleProduct({ product }) {
       const productToAdd = { ...product, id: nanoid(), selectedSwitch };
       addItem(productToAdd, 1);
     }
-    const productToAdd = { ...product, id: nanoid(), selectedSwitch };
-    addItem(productToAdd, 1);
+  
   };
 
   const handleChange = (event) => {
@@ -66,7 +65,7 @@ export default function SingleProduct({ product }) {
 
           {product.img2 ? (
             <Image
-              src={`/assets/${product.img2}`}
+              src={product.img2}
               width={200}
               height={200}
               style={{ objectFit: "contain", height: "29%" }}
