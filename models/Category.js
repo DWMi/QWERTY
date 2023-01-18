@@ -10,6 +10,7 @@ const CategorySchema = new mongoose.Schema(
       {
         brandName: String,
         img: String,
+        _id: String,
       },
     ],
   },
