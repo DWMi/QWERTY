@@ -75,10 +75,10 @@ const Header = () => {
                   ))}
               </Menu.Items>
             </Menu>
-            <Link className={style.headerLinks} href="faq">
+            <Link className={style.headerLinks} href="/faq">
               FAQ
             </Link>
-            <Link className={style.headerLinks} href="/">
+            <Link className={style.headerLinks} href="/contact">
               CONTACT
             </Link>
 

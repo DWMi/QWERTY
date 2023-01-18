@@ -158,7 +158,8 @@ export async function getServerSideProps() {
   
     await db.connect();
     const products = await Product.find().lean();
-    const categories = await Category.find().lean();
+    const filter = { name:'Keyboards'}
+    const categories = await Category.find(filter).lean();
     return {
       props: {
         products: products.map(db.convertDocToObj),
