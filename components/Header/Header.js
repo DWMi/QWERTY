@@ -9,9 +9,11 @@ import fetcher from "../../utils/fetcher";
 import { useRouter } from "next/router";
 import { BsChevronDown } from "react-icons/bs";
 import { signOut, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import { Menu } from "@headlessui/react";
 import DropdownLink from "../Dropdown Link/DropdownLink";
+import { useCart } from "react-use-cart";
+import { useEffect, useState } from "react";
+
 import HamburgerMenu from "../Hamburger/Hamburger";
 import { useMediaQuery } from "@mui/material";
 
@@ -19,8 +21,17 @@ const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 const Header = () => {
   const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
+  const { totalItems } = useCart();
+
+  const [totalCartItems, setTotalCartItems] = useState(null)
+
+  useEffect(() => {
+    setTotalCartItems(totalItems)
+  }, [totalItems]);
+
 
   const { status, data: session } = useSession();
+
   const logoutHandler = () => {
     signOut({ callbackUrl: "/" });
   };
@@ -122,17 +133,45 @@ const Header = () => {
                 LOGIN
               </Link>
             )}
+            <Link className={style.headerLinks} href="/checkout">
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <AiOutlineShoppingCart
+              style={{
+                stroke: "black",
+                strokeWidth: "10",
+                fontSize: "20px",
+                position: "relative",
+              }}
+            />
+            {totalCartItems > 0 ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  background: "red",
+                  borderRadius: "50%",
+                  padding: "5px",
+                  width: "15px",
+                  height: "15px",
+                  position: "absolute",
+                  left: '15px',
+                  top: '-5px'
+                
+                }}
+              >
+                <p style={{ fontSize: "12px", color: 'white' }}>{totalCartItems}</p>
+              </div>
+            ) : null}
+          </div>
+        </Link>
 
-            <Link className={style.headerLinks} href="/">
-              <AiOutlineShoppingCart
-                style={{ stroke: "black", strokeWidth: "10", fontSize: "20px" }}
-              />
-            </Link>
           </div>
         ) : (
-          <HamburgerMenu data={data} />
+          <HamburgerMenu totalCartItems={totalCartItems} data={data} />
         )}
-    </div>
+        
+      </div>
   );
 };
 
