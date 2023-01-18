@@ -1,4 +1,4 @@
-import styles from "./AdminProduct.module.css";
+import styles from "./AddNewProduct.module.css";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Image from "next/image";
@@ -28,12 +28,16 @@ const style = {
   pb: 3,
 };
 
-const AdminProduct = (props) => {
+const AddNewProd = (props) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [main, setMain] = React.useState("");
 
+  const [imageOne, setImageOne] = React.useState("");
+  const [imageTwo, setImageTwo] = React.useState("");
+
   const [name, setName] = React.useState("");
+  const [brand, setBrand] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [qty, setQty] = React.useState("");
   const [category, setCategory] = React.useState("");
@@ -42,6 +46,7 @@ const AdminProduct = (props) => {
     //hello
     router.push("/admin/products");
     setName("");
+    setBrand("");
     setPrice("");
     setQty("");
     setCategory("");
@@ -52,50 +57,78 @@ const AdminProduct = (props) => {
   const submitHandler = async ({
     _id,
     name,
-    pictures,
+    brand,
+    img1,
+    img2,
     price,
     qty,
     category,
   }) => {
     try {
-      const response = await axios.post("/api/admin/editProduct", {
-        _id: props.product._id,
-        name: name || props.product.name,
-        pictures,
-        price: price || props.product.price,
-        qty: qty || props.product.qty,
-        category: category || props.product.category,
+      const uploadPreset = "qwerty";
+      const url = "https://api.cloudinary.com/v1_1/dmz4jw3ob/image/upload";
+
+      const formDataOne = new FormData();
+      formDataOne.append("upload_preset", uploadPreset);
+      formDataOne.append("file", imageOne);
+
+      const formDataTwo = new FormData();
+      formDataTwo.append("upload_preset", uploadPreset);
+      formDataTwo.append("file", imageTwo);
+
+      const imageResponseOne = await fetch(url, {
+        method: "POST",
+        body: formDataOne,
+      }).then((r) => r.json());
+      console.log(imageResponseOne);
+
+      const imageResponseTwo = await fetch(url, {
+        method: "POST",
+        body: formDataTwo,
+      }).then((r) => r.json());
+      console.log(imageResponseTwo);
+
+      const response = await axios.post("/api/admin/addNewProduct", {
+        name: name,
+        brand: brand,
+        img1: imageResponseOne.secure_url,
+        img2: imageResponseTwo.secure_url,
+        price: price,
+        qty: qty,
+        category: category,
       });
       setName("");
+      setBrand("");
       setPrice("");
       setQty("");
       setCategory("");
       setMain("");
-      props.setOpen(false);
+      props.setOpenAdd(false);
       router.push("/admin/products");
       console.log(response);
     } catch (err) {
       console.log(getError(err));
     }
   };
+
   const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
   return (
     <Modal
-      open={props.open}
+      open={props.openAdd}
       onClose={props.handleClose}
       style={{
         backgroundColor: "white 0.5",
       }}
     >
       <Box sx={{ ...style, width: "80%", height: "80%" }}>
-        <h1 style={{ margin: "30px" }}>Edit Product</h1>
+        <h1 style={{ margin: "30px" }}>Add new Product</h1>
         <br></br>
         <form
           className={styles.LoginForm}
           onSubmit={handleSubmit(submitHandler)}
         >
           <div className={styles.AdminProductRowSingleElement}>
-            <h3>ID: {props.product._id}</h3>
+            <h3>ID: Will be auto generated</h3>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             <h3>Name:</h3>
@@ -109,42 +142,56 @@ const AdminProduct = (props) => {
                 setName(event.target.value);
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.product.name}
               type="text"
               id="name"
+              placeholder="Add name"
+              autoFocus
+            ></input>
+          </div>
+          <div className={styles.AdminProductRowSingleElement}>
+            <h3>Brand:</h3>
+            <input
+              {...register("brand", {
+                required: false,
+              })}
+              value={brand}
+              onChange={(event) => {
+                setMain(event.target.value);
+                setBrand(event.target.value);
+              }}
+              className={styles.LoginEmailInput}
+              type="text"
+              id="brand"
+              placeholder="Add brand"
               autoFocus
             ></input>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
             <h3 style={{ textAlign: "center" }}>Pictures:</h3>
-            {props.product.category === "Keyboards" ||
-            props.product.brand === "Cables" ? (
-              <>
-                <Image
-                  style={{ objectFit: "contain" }}
-                  src={`/assets/${props.product.img1}`}
-                  width={"100"}
-                  height={"100"}
-                  alt={props.product.name}
-                />
-                <Image
-                  style={{ objectFit: "contain" }}
-                  src={`/assets/${props.product.img2}`}
-                  width={"100"}
-                  height={"100"}
-                  alt={props.product.name}
-                />
-              </>
-            ) : (
-              <Image
-                style={{ objectFit: "contain" }}
-                src={`/assets/${props.product.img1}`}
-                width={"100"}
-                height={"100"}
-                alt={props.product.name}
-              />
-            )}
+            <input
+              id="img1"
+              type="file"
+              name="img1"
+              accept="image"
+              onInput={(e) => {
+                setImageOne(e.target.files[0]);
+              }}
+              {...register("img1", {
+                required: false,
+              })}
+            ></input>
+            <input
+              id="img2"
+              type="file"
+              name="img2"
+              onInput={(e) => {
+                setImageTwo(e.target.files[0]);
+              }}
+              {...register("img2", {
+                required: false,
+              })}
+            ></input>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
@@ -159,7 +206,7 @@ const AdminProduct = (props) => {
                 setPrice(event.target.value);
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.product.price}
+              placeholder="Add price in SEK"
               type="number"
               id="price"
               autoFocus
@@ -178,7 +225,7 @@ const AdminProduct = (props) => {
                 setQty(event.target.value);
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.product.qty}
+              placeholder="Add quantity"
               type="number"
               id="qty"
               autoFocus
@@ -197,7 +244,7 @@ const AdminProduct = (props) => {
                 setCategory(event.target.value);
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.product.category}
+              placeholder="Add category"
               type="text"
               id="category"
               autoFocus
@@ -209,11 +256,11 @@ const AdminProduct = (props) => {
               disabled
               type="submit"
             >
-              Save changes
+              Save product
             </button>
           ) : (
             <button className={styles.AdminButton} type="submit">
-              Save changes
+              Save product
             </button>
           )}
         </form>
@@ -222,4 +269,4 @@ const AdminProduct = (props) => {
   );
 };
 
-export default AdminProduct;
+export default AddNewProd;
