@@ -30,6 +30,12 @@
     align-items: flex-start;
     padding: 10px;
 }
+.faqBox:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+    box-shadow: 10px 10px black;
+    transform-origin: bottom;
+}
 .questionBox{
     font-weight: bold;
     display: flex;

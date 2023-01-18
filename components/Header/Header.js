@@ -29,6 +29,7 @@ const Header = () => {
     <div className={style.headerCon}>
       <Link href="/">
         <Image src={LOGO} alt="QWERTY LOGO" />
+      </Link>
         {!isTabletOrPhone ? (
           <div className={`${style.headerLinksCon} ${fontStyle.className}`}>
             <Link className={style.headerLinks} href="/">
@@ -39,8 +40,8 @@ const Header = () => {
               <div className={style.centerContainer}>
                 <Menu.Button className={style.headerLinksProd}>
                   products
+                <BsChevronDown/>
                 </Menu.Button>
-                <BsChevronDown></BsChevronDown>
               </div>
               <Menu.Items className={style.MenuItems}>
                 {data &&
@@ -74,7 +75,7 @@ const Header = () => {
                   ))}
               </Menu.Items>
             </Menu>
-            <Link className={style.headerLinks} href="/">
+            <Link className={style.headerLinks} href="faq">
               FAQ
             </Link>
             <Link className={style.headerLinks} href="/">
@@ -87,6 +88,7 @@ const Header = () => {
               <Menu as="div" className={style.DropdownMenuHeader}>
                 <Menu.Button className={style.headerLinks}>
                   my account
+                  <BsChevronDown/>
                 </Menu.Button>
                 <Menu.Items className={style.MenuItems}>
                   <Menu.Item>
@@ -130,7 +132,6 @@ const Header = () => {
         ) : (
           <HamburgerMenu data={data} />
         )}
-      </Link>
     </div>
   );
 };
