@@ -108,19 +108,19 @@ export default function checkoutPage() {
                       >
                         <TableCell component="th" scope="row">
                           <Image
-                            src={`/assets/${item.img1}`}
+                            src={item.img1}
                             width={100}
                             height={100}
                             style={{ objectFit: "contain" }}
                           />
                         </TableCell>
                         <TableCell align="left">
-                          {item.name}
+                          {item.name}{" "}
                           {item.selectedSwitch
                             ? `(${item.selectedSwitch})`
                             : null}
                         </TableCell>
-                        <TableCell align="right">{item.price}</TableCell>
+                        <TableCell align="right">{item.price},00 SEK</TableCell>
                         {spinner ? (
                           <TableCell align="right">
                             <CircularProgress color="inherit" />
@@ -140,7 +140,9 @@ export default function checkoutPage() {
                                     item.id,
                                     item.quantity == 1 ? 1 : item.quantity - 1
                                   );
-                                  item.quantity == 1 ? setSpinner(false) : setSpinner(true)
+                                  item.quantity == 1
+                                    ? setSpinner(false)
+                                    : setSpinner(true);
                                 }}
                                 style={{
                                   display: "flex",
@@ -180,7 +182,9 @@ export default function checkoutPage() {
                           </TableCell>
                         )}
 
-                        <TableCell align="right">{item.itemTotal}</TableCell>
+                        <TableCell align="right">
+                          {item.itemTotal},00 SEK
+                        </TableCell>
                         <TableCell align="right">
                           <BsFillTrashFill
                             style={{ cursor: "pointer", fontSize: "16px" }}
@@ -197,15 +201,9 @@ export default function checkoutPage() {
             </Table>
           </TableContainer>
 
-          <Button
-            onClick={goToPayment}
-            type="submit"
-            color="success"
-            variant="contained"
-            style={{ width: "50%" }}
-          >
+          <button onClick={goToPayment} className={s.ProductPageButton}>
             PROCEED TO CHECKOUT
-          </Button>
+          </button>
         </div>
       ) : (
         <h2>Your shopping cart is empty!</h2>

@@ -79,8 +79,8 @@ const Landing = ({ products, categories }) => {
                                 src={`/brandPic/${brand.img}`}
                                 className={styles.brandPic}
                                 alt="brand name"
-                                width={100}
-                                height={100}
+                                width={2000}
+                                height={2000}
                               />
                               <div className={styles.brandInfoBox}>
                                 <h4>{brand.brandName}</h4>

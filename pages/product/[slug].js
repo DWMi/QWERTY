@@ -45,7 +45,6 @@ export default function SingleProduct({ product }) {
       const productToAdd = { ...product, id: nanoid(), selectedSwitch };
       addItem(productToAdd, 1);
     }
-  
   };
 
   const handleChange = (event) => {
@@ -58,16 +57,16 @@ export default function SingleProduct({ product }) {
         <div className={s.imgMainContainer}>
           <Image
             src={product.img1}
-            width={200}
-            height={300}
+            width={1000}
+            height={1000}
             style={{ objectFit: "contain", width: "100%", height: "70%" }}
           />
 
           {product.img2 ? (
             <Image
               src={product.img2}
-              width={200}
-              height={200}
+              width={1000}
+              height={1000}
               style={{ objectFit: "contain", height: "29%" }}
             />
           ) : null}
@@ -87,38 +86,43 @@ export default function SingleProduct({ product }) {
                   value={selectedSwitch}
                   label="selectedSwitch"
                   onChange={handleChange}
+                  style={{ textTransform: "uppercase" }}
                 >
                   {product &&
                     product.switches.map((keySwitch) => {
-                      return <MenuItem value={keySwitch}>{keySwitch}</MenuItem>;
+                      return (
+                        <MenuItem
+                          value={keySwitch}
+                          style={{ textTransform: "uppercase" }}
+                        >
+                          {keySwitch}
+                        </MenuItem>
+                      );
                     })}
                 </Select>
               </FormControl>
             ) : null}
 
             {loading ? (
-              <Button
+              <button
+                className={s.ProductPageButton}
                 onClick={() => {
                   addToCart();
                   setLoading(true);
                 }}
-                color="success"
-                variant="contained"
-                style={{width: '130px'}}
               >
-                <CircularProgress color="inherit" />
-              </Button>
+                <CircularProgress style={{ width: "30px" }} color="inherit" />
+              </button>
             ) : (
-              <Button
+              <button
                 onClick={() => {
                   addToCart();
                   setLoading(true);
                 }}
-                color="success"
-                variant="contained"
+                className={s.ProductPageButton}
               >
                 ADD TO CART
-              </Button>
+              </button>
             )}
           </div>
         </div>
