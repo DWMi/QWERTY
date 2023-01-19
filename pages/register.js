@@ -55,7 +55,7 @@ export default function Login() {
   return (
     <div className={styles.LoginFormContainer}>
       <form className={styles.LoginForm} onSubmit={handleSubmit(submitHandler)}>
-        <h1 className="LoginTitle">Register Account</h1>
+        <h1 className={styles.LoginTitle}>Register Account</h1>
         <input
           className={styles.LoginEmailInput}
           placeholder="First Name"
@@ -129,7 +129,6 @@ export default function Login() {
             },
           })}
           id="password"
-          autoFocus
         ></input>
         {errors.password && (
           <div className={styles.LoginPasswordInputErrorMessage}>
@@ -149,7 +148,6 @@ export default function Login() {
             },
           })}
           id="confirmPassword"
-          autoFocus
         ></input>
         {errors.confirmPassword && (
           <div className={styles.LoginPasswordInputErrorMessage}>
