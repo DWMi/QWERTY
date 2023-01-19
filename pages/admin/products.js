@@ -81,6 +81,7 @@ export default function Products({ products }) {
             flexDirection: "row",
             justifyContent: "flex-end",
             width: "80%",
+            gap: "20px",
           }}
         >
           <button
@@ -104,7 +105,9 @@ export default function Products({ products }) {
             return (
               <div className={styles.AdminProductRow}>
                 <div className={styles.AdminProductRowSingleElement}>
-                  <h3>{prod._id.slice(-5)}</h3>
+                  <h3 style={{ textTransform: "uppercase" }}>
+                    {prod._id.slice(-5)}
+                  </h3>
                 </div>
                 <div className={styles.AdminProductRowSingleElement}>
                   <h3>{prod.name}</h3>

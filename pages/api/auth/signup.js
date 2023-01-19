@@ -48,6 +48,7 @@ async function handler(req, res) {
     firstName: user.firstName,
     lastName: user.lastName,
     isAdmin: user.isAdmin,
+    address: user.address
   });
 }
 

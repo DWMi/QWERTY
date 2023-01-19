@@ -9,7 +9,7 @@ const ProductCard = (props) => {
       <Link href={`/product/${prod.name}`}>
         <Image
           style={{ objectFit: "contain", width: "100%" }}
-          src={`/assets/${prod.img1}`}
+          src={prod.img1}
           width={"200"}
           height={"200"}
           alt={prod.name}

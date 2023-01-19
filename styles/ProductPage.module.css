@@ -1,34 +1,53 @@
 .centerContainer {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 100px;
+  gap: 20px;
 }
 
-
 .imgMainContainer {
-    width: 500px;
-    height: 500px;
-    border: 1px solid black;
+  width: 500px;
+  height: 500px;
+  border: 1px solid lightgrey;
 }
 
 .container {
-    display: flex;
-    gap: 30px;
-    width: 60%;
-    margin: 50px;
+  display: flex;
+  gap: 30px;
+  width: 60%;
+  margin: 50px;
 }
 
 .productInfoDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .productSelectDiv {
-    display: flex;
-    height: 50px;
+  display: flex;
+  height: 50px;
+}
+
+.ProductPageButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px white;
+  color: white;
+  background-color: black;
+  bottom: -25px;
+  gap: 5px;
+  padding: 10px;
+  transition: all 200ms ease-in-out;
+}
+
+.ProductPageButton:hover {
+  scale: 1.01;
+  box-shadow: 10px 10px black;
 }

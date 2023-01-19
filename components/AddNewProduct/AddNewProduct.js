@@ -81,22 +81,41 @@ const AddNewProd = (props) => {
         body: formDataOne,
       }).then((r) => r.json());
       console.log(imageResponseOne);
-
-      const imageResponseTwo = await fetch(url, {
-        method: "POST",
-        body: formDataTwo,
-      }).then((r) => r.json());
-      console.log(imageResponseTwo);
-
-      const response = await axios.post("/api/admin/addNewProduct", {
-        name: name,
-        brand: brand,
-        img1: imageResponseOne.secure_url,
-        img2: imageResponseTwo.secure_url,
-        price: price,
-        qty: qty,
-        category: category,
-      });
+      let image2slug;
+      if (imageTwo) {
+        const imageResponseTwo = await fetch(url, {
+          method: "POST",
+          body: formDataTwo,
+        }).then((r) => r.json());
+        console.log(imageResponseTwo);
+        image2slug = imageResponseTwo.secure_url;
+      }
+      if (category === "Keyboards") {
+        const response = await axios.post("/api/admin/addNewProduct", {
+          name: name,
+          brand: brand,
+          img1: imageResponseOne.secure_url,
+          img2: image2slug,
+          price: price,
+          qty: qty,
+          category: category,
+        });
+        console.log(response);
+      } else {
+        const response = await axios.post(
+          "/api/admin/addNewProductNoSwitches",
+          {
+            name: name,
+            brand: brand,
+            img1: imageResponseOne.secure_url,
+            img2: image2slug,
+            price: price,
+            qty: qty,
+            category: category,
+          }
+        );
+        console.log(response);
+      }
       setName("");
       setBrand("");
       setPrice("");
@@ -105,7 +124,6 @@ const AddNewProd = (props) => {
       setMain("");
       props.setOpenAdd(false);
       router.push("/admin/products");
-      console.log(response);
     } catch (err) {
       console.log(getError(err));
     }
@@ -120,7 +138,7 @@ const AddNewProd = (props) => {
         backgroundColor: "white 0.5",
       }}
     >
-      <Box sx={{ ...style, width: "80%", height: "80%" }}>
+      <Box sx={{ ...style, width: "80%", height: "80%", overflowY: "auto" }}>
         <h1 style={{ margin: "30px" }}>Add new Product</h1>
         <br></br>
         <form
@@ -234,7 +252,7 @@ const AddNewProd = (props) => {
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
             <h3 for="category">Choose a category:</h3>
-            <input
+            <select
               {...register("category", {
                 required: false,
               })}
@@ -248,7 +266,11 @@ const AddNewProd = (props) => {
               type="text"
               id="category"
               autoFocus
-            ></input>
+            >
+              <option value="">Select category</option>
+              <option value="Keyboards">Keyboards</option>
+              <option value="Accessories">Accessories</option>
+            </select>
           </div>
           {main.length === 0 ? (
             <button
