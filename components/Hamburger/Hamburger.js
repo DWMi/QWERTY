@@ -41,7 +41,7 @@ const HamburgerMenu = (props) => {
                 ))}
             </div>
             <Link style={{ margin:'0', color: "#FFFFFF" }} href="/faq">FAQ</Link>
-            <Link style={{ margin:'0', color: "#FFFFFF" }} href="/">CONTACT</Link>
+            <Link style={{ margin:'0', color: "#FFFFFF" }} href="/contact">CONTACT</Link>
 
       <div>
             {status === "loading" ? (
