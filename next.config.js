@@ -10,6 +10,11 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    fontLoaders: [
+      { loader: "@next/font/google", options: { subsets: ["sans-serif"] } },
+    ],
+  },
 };
 
 module.exports = nextConfig;

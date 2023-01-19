@@ -2,25 +2,25 @@ import React, { useEffect } from "react";
 import styles from "../../styles/Admin.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Order from "../../models/Order";
+import User from "../../models/User";
 import db from "../../utils/db";
 import { BsFillGearFill, BsFillTrashFill } from "react-icons/bs";
-import AdminRow from "../../components/AdminRowOrders/AdminRow.js";
-import AdminOrder from "../../components/AdminOrders/AdminOrder";
+import AdminRow from "../../components/AdminRowUsers/AdminRow.js";
+import AdminUser from "../../components/AdminUser/AdminUser";
 
 export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
   await db.connect();
-  const orders = await Order.find().lean();
+  const users = await User.find().lean();
   return {
     props: {
-      orders: orders.map(db.convertDocToObj),
+      users: users.map(db.convertDocToObj),
     },
   };
   db.disconnect();
 }
 
-export default function Products({ orders }) {
+export default function Products({ users }) {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -31,17 +31,23 @@ export default function Products({ orders }) {
     }
   }, []);
 
-  const [selectedOrder, setSelectedOrder] = React.useState("");
+  const [selectedUser, setSelectedUser] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [openDelete, setOpenDelete] = React.useState(false);
 
-  const handleOpen = (order) => {
+  const handleOpen = (user) => {
     setOpen(true);
-    setSelectedOrder(order);
+    setSelectedUser(user);
   };
 
   const handleClose = () => {
-    router.push("/admin/orders");
+    router.push("/admin/users");
     setOpen(false);
+  };
+
+  const handleOpenDelete = (user) => {
+    setOpenDelete(true);
+    setSelectedUser(user);
   };
 
   return (
@@ -57,23 +63,28 @@ export default function Products({ orders }) {
           }}
         ></div>
         <AdminRow></AdminRow>
-        {orders &&
-          orders.map((order) => {
+        {users &&
+          users.map((user) => {
             return (
               <div className={styles.AdminProductRow}>
                 <div className={styles.AdminUserRowSingleElement}>
                   <h3 style={{ textTransform: "uppercase" }}>
-                    {order.orderNumber}
+                    {user._id.slice(-5)}
                   </h3>
                 </div>
                 <div className={styles.AdminUserRowSingleElement}>
-                  <h3>{order.date}</h3>
+                  <h3>
+                    {user.firstName} {user.lastName}
+                  </h3>
                 </div>
                 <div className={styles.AdminUserRowSingleElement}>
-                  <h3>{order.customer_details.name}</h3>
+                  <h3>{user.email}</h3>
                 </div>
-                <div className={styles.AdminProductRowSingleElement}>
-                  {order.isSent === false ? (
+                <div className={styles.AdminUserRowSingleElement}>
+                  <h3>{user.address}</h3>
+                </div>
+                <div className={styles.AdminProductRowSingleElementIsAdmin}>
+                  {user.isAdmin === false ? (
                     <h3 style={{ color: "red" }}>No</h3>
                   ) : (
                     <h3 style={{ color: "green" }}>Yes</h3>
@@ -82,19 +93,25 @@ export default function Products({ orders }) {
                 <div className={styles.AdminProductRowSingleElementIcon}>
                   <BsFillGearFill
                     style={{ cursor: "pointer" }}
-                    onClick={() => handleOpen(order)}
+                    onClick={() => handleOpen(user)}
                   ></BsFillGearFill>
+                </div>
+                <div className={styles.AdminProductRowSingleElementIcon}>
+                  <BsFillTrashFill
+                    onClick={() => handleOpenDelete(user)}
+                    style={{ color: "red", cursor: "pointer" }}
+                  ></BsFillTrashFill>
                 </div>
               </div>
             );
           })}
       </div>
-      <AdminOrder
-        order={selectedOrder}
+      <AdminUser
+        user={selectedUser}
         handleClose={handleClose}
         open={open}
         setOpen={setOpen}
-      ></AdminOrder>
+      ></AdminUser>
     </>
   );
 }
