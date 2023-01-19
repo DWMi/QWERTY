@@ -23,15 +23,15 @@ const faq = () => {
         },
         {
             question: 'Q.What payment methods do you accept?',
-            answer: 'A.We accept all major credit cards, PayPal, and bank transfers.'
+            answer: 'A.We accept all major credit cards, Klarna,Apple pay(Depending on what browser you are using) , Google pay and bank transfers.'
         },
         {
             question: 'Q.How long will it take for my keyboard to be delivered?',
-            answer: 'A.Delivery times vary based on your location and the shipping method chosen at checkout. Please contact our customer service team for more information.'
+            answer: 'A.Delivery times vary based on your location and the shipping method chosen at checkout (standard 2-3 business). Please contact our customer service team for more information.'
         },
         {
             question: 'Q.Do you offer international shipping?',
-            answer: 'A.Yes, we offer international shipping to many countries around the world with some exceptions. Please contact our customer team service for further information.'
+            answer: 'A.Right now we only ship to Sweden, Norway and Denmark Please contact our customer team service for further information.'
         },
         {
             question: 'Q.Do you have any special deals or discounts available?',

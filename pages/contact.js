@@ -88,7 +88,7 @@ import {
             }
           
          }
-   console.log(values.phone.length)
+  
     return (
       <ChakraProvider className={s.container}>
         <Container className={`${s.contactCon} ${fontStyle.className}`}>

@@ -19,7 +19,7 @@
 }
 .contactInput{
     width: 400px;
-    border: 0.2px solid #828282;
+    border: 0.2px solid #828282!important;
     padding: 10px;
     opacity: 0.5;
 
@@ -28,7 +28,7 @@
 .contactInputText{
 
     width: 400px;
-    border: 0.2px solid #828282;
+    border: 0.2px solid #828282!important;
     padding: 10px;
     opacity: 0.5;
     height: 100px;
@@ -37,9 +37,9 @@
 
 .submitBtn{
     color: white;
-    background-color: black;
-    padding: 10px 40px;
-    border-radius: 0;
+    background-color: black!important;
+    padding: 10px 40px!important;
+    border-radius: 0!important;
 }
 .submitBtn:hover{
     background-color: black;

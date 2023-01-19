@@ -88,7 +88,7 @@ const Header = () => {
           <Link className={style.headerLinks} href="/faq">
             FAQ
           </Link>
-          <Link className={style.headerLinks} href="/">
+          <Link className={style.headerLinks} href="/contact">
             CONTACT
           </Link>
 
