@@ -13,10 +13,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 
+
 export default function SingleProduct({ product }) {
   const [loading, setLoading] = useState(false);
   const [selectedSwitch, setSelectedSwitch] = useState("");
-
+  const [imgSrc1, setImgSrc1] = useState(product.img1);
+  const [imgSrc2, setImgSrc2] = useState(product.img2);
   useEffect(() => {
     if (product.category === "Keyboards") {
       setSelectedSwitch("mx red");
@@ -55,8 +57,9 @@ export default function SingleProduct({ product }) {
     <div className={s.centerContainer}>
       <div className={s.container}>
         <div className={s.imgMainContainer}>
+        
           <Image
-            src={product.img1}
+            src={imgSrc1}
             width={1000}
             height={1000}
             style={{ objectFit: "contain", width: "100%", height: "70%" }}
@@ -64,10 +67,19 @@ export default function SingleProduct({ product }) {
 
           {product.img2 ? (
             <Image
-              src={product.img2}
+              src={imgSrc2}
               width={1000}
               height={1000}
-              style={{ objectFit: "contain", height: "29%" }}
+              style={{ objectFit: "contain", height: "29%",cursor:'pointer' }}
+              onClick={() => {
+                if (imgSrc1 === product.img1 &&imgSrc2 === product.img2 ) {
+                  setImgSrc1(product.img2);
+                  setImgSrc2(product.img1);
+                } else {
+                  setImgSrc1(product.img1);
+                  setImgSrc2(product.img2);
+                }
+              }}
             />
           ) : null}
         </div>
@@ -87,13 +99,14 @@ export default function SingleProduct({ product }) {
                   label="selectedSwitch"
                   onChange={handleChange}
                   style={{ textTransform: "uppercase" }}
+                  inputProps={{MenuProps: {disableScrollLock: true}}}
                 >
                   {product &&
                     product.switches.map((keySwitch) => {
                       return (
                         <MenuItem
                           value={keySwitch}
-                          style={{ textTransform: "uppercase" }}
+                          style={{ paddingRight:'0', textTransform: "uppercase" }}
                         >
                           {keySwitch}
                         </MenuItem>
