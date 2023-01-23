@@ -26,6 +26,7 @@ export default function checkoutPage() {
   const { updateItemQuantity } = useCart();
   const { removeItem } = useCart();
   const { totalItems } = useCart();
+  const { cartTotal } = useCart();
 
   const [loading, setLoading] = useState(false);
   const [spinner, setSpinner] = useState(false);
@@ -59,8 +60,7 @@ export default function checkoutPage() {
     }
   };
 
-
-//DOESN'T WOOORK !!!-----------------------------👇
+  //DOESN'T WOOORK !!!-----------------------------👇
   // if (loading) {
   //   return(
   //     <Backdrop
@@ -207,10 +207,7 @@ export default function checkoutPage() {
               </TableContainer>
               <div style={{ fontWeight: "bold", fontSize: "2em" }}>
                 {`Total: 
-            ${cartItems.reduce(
-              (accumulator, currentValue) => accumulator + currentValue.price,
-              0
-            )},00 SEK`}
+            ${cartTotal},00 SEK`}
               </div>
               <button onClick={goToPayment} className={s.ProductPageButton}>
                 PROCEED TO CHECKOUT
@@ -262,6 +259,7 @@ export default function checkoutPage() {
                       }}
                     >
                       <div
+                        style={{ cursor: "pointer" }}
                         onClick={() => {
                           updateItemQuantity(
                             item.id,
@@ -271,13 +269,13 @@ export default function checkoutPage() {
                             ? setSpinner(false)
                             : setSpinner(true);
                         }}
-              
                       >
                         <p>-</p>
                       </div>
 
                       <div>{item.quantity}</div>
                       <div
+                        style={{ cursor: "pointer" }}
                         onClick={() => {
                           updateItemQuantity(item.id, item.quantity + 1);
                           setSpinner(true);
@@ -301,10 +299,7 @@ export default function checkoutPage() {
             })}
           <div style={{ fontWeight: "bold", fontSize: "1.5em" }}>
             {`Total: 
-            ${cartItems.reduce(
-              (accumulator, currentValue) => accumulator + currentValue.price,
-              0
-            )},00 SEK`}
+            ${cartTotal},00 SEK`}
           </div>
           <button onClick={goToPayment} className={s.ProductPageButton}>
             PROCEED TO CHECKOUT
