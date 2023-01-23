@@ -8,6 +8,9 @@ import { toast } from "react-toastify";
 import { getError } from "../utils/error.js";
 import { useRouter } from "next/router.js";
 import axios from "axios";
+import { Abel } from "@next/font/google";
+
+const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 export default function Login() {
   const { data: session } = useSession();
