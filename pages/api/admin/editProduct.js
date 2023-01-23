@@ -27,8 +27,9 @@ async function handler(req, res) {
   });
   updateProd.save();
   db.disconnect();
-  console.log(req.body);
-  res.json(req.body);
+  console.log(updateProd);
+
+  res.send(updateProd);
 
   /*   return res.status(200)({
     message: "Product saved",

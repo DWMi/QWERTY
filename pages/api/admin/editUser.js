@@ -27,18 +27,9 @@ async function handler(req, res) {
   });
   updateUser.save();
   db.disconnect();
-  console.log(req.body);
-  res.json(req.body);
+  console.log(updateUser);
 
-  /*  return res.status(200)({
-    message: "User saved",
-    _id: updateUser._id,
-    name: updateUser.name,
-    pictures: updateUser.pictures,
-    price: updateUser.price,
-    qty: updateUser.qty,
-    category: updateProd.category,
-  }); */
+  res.send(updateUser);
 }
 
 export default handler;
