@@ -6,16 +6,18 @@ const ProductCard = (props) => {
   const prod = props.prod;
   return (
     <div className={s.productCard}>
-      <Link href={`/product/${prod.name}`}>
-        <Image
-          style={{ objectFit: "contain", width: "100%" }}
-          src={prod.img1}
-          width={"200"}
-          height={"200"}
-          alt={prod.name}
-        />
+      <Link className={s.productCardCont} href={`/product/${prod.name}`}>
+        <div style={{ width: "200px", height: "200px", display: "flex" }}>
+          <Image
+            style={{ objectFit: "contain", width: "100%" }}
+            src={prod.img1}
+            width={"256"}
+            height={"205"}
+            alt={prod.name}
+          />
+        </div>
         <h3>{prod.name}</h3>
-        <h2>{prod.price} :-</h2>
+        <h2>{prod.price},00 SEK</h2>
       </Link>
     </div>
   );

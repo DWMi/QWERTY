@@ -95,7 +95,7 @@ const Footer =()=>{
                                 0123456789
                         </li>
                         <li>
-                                info@qwerty.com
+                                info.qwertykeyboards@gmail.com
                         </li>
                     </ul>
                 </div>

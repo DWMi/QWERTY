@@ -1,17 +1,15 @@
-import styles from "./AdminProduct.module.css";
+import styles from "./AdminUser.module.css";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
 import { getError } from "../../utils/error";
-import { Button } from "@mui/material";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
-import { findDOMNode, ReactDOM } from "react-dom";
 import { useEffect } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const style = {
@@ -28,57 +26,59 @@ const style = {
   pb: 3,
 };
 
-const AdminProduct = (props) => {
+const AdminUser = (props) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [main, setMain] = React.useState("");
 
-  const [name, setName] = React.useState("");
-  const [price, setPrice] = React.useState("");
-  const [qty, setQty] = React.useState("");
-  const [category, setCategory] = React.useState("");
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [isAdmin, setIsAdmin] = React.useState();
 
   useEffect(() => {
     //hello
-    router.push("/admin/products");
-    setName("");
-    setPrice("");
-    setQty("");
-    setCategory("");
+    router.push("/admin/users");
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setAddress("");
+    setIsAdmin();
     setMain("");
   }, []);
 
   const { handleSubmit, register, getValues } = useForm();
   const submitHandler = async ({
     _id,
-    name,
-    pictures,
-    price,
-    qty,
-    category,
+    firstName,
+    lastName,
+    email,
+    address,
+    isAdmin,
   }) => {
     try {
-      const response = await axios.post("/api/admin/editProduct", {
-        _id: props.product._id,
-        name: name || props.product.name,
-        pictures,
-        price: price || props.product.price,
-        qty: qty || props.product.qty,
-        category: category || props.product.category,
+      const response = await axios.post("/api/admin/editUser", {
+        _id: props.user._id,
+        firstName: firstName || props.user.firstName,
+        lastName: lastName || props.user.lastName,
+        email: email || props.user.email,
+        address: address || props.user.address,
+        isAdmin: JSON.parse(isAdmin) || props.user.isAdmin,
       });
-      setName("");
-      setPrice("");
-      setQty("");
-      setCategory("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setAddress("");
+      setIsAdmin();
       setMain("");
       props.setOpen(false);
-      router.push("/admin/products");
+      router.push("/admin/users");
       console.log(response);
     } catch (err) {
       console.log(getError(err));
     }
   };
-  const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
   return (
     <Modal
       open={props.open}
@@ -88,120 +88,112 @@ const AdminProduct = (props) => {
       }}
     >
       <Box sx={{ ...style, width: "80%", height: "80%" }}>
-        <h1 style={{ margin: "30px" }}>Edit Product</h1>
+        <h1 style={{ margin: "30px" }}>Edit User</h1>
         <br></br>
         <form
           className={styles.LoginForm}
           onSubmit={handleSubmit(submitHandler)}
         >
           <div className={styles.AdminProductRowSingleElement}>
-            <h3>ID: {props.product._id}</h3>
+            <h3>ID: {props.user._id}</h3>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
-            <h3>Name:</h3>
+            <h3>First Name:</h3>
             <input
-              {...register("name", {
+              {...register("firstName", {
                 required: false,
               })}
-              value={name}
+              value={firstName}
               onChange={(event) => {
                 setMain(event.target.value);
-                setName(event.target.value);
+                setFirstName(event.target.value);
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.product.name}
+              placeholder={props.user.firstName}
               type="text"
-              id="name"
+              id="firstName"
               autoFocus
             ></input>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
-            {" "}
-            <h3 style={{ textAlign: "center" }}>Pictures:</h3>
-            {props.product.category === "Keyboards" ||
-            props.product.brand === "Cables" ? (
-              <>
-                <Image
-                  style={{ objectFit: "contain" }}
-                  src={props.product.img1}
-                  width={"100"}
-                  height={"100"}
-                  alt={props.product.name}
-                />
-                <Image
-                  style={{ objectFit: "contain" }}
-                  src={props.product.img2}
-                  width={"100"}
-                  height={"100"}
-                  alt={props.product.name}
-                />
-              </>
-            ) : (
-              <Image
-                style={{ objectFit: "contain" }}
-                src={props.product.img1}
-                width={"100"}
-                height={"100"}
-                alt={props.product.name}
-              />
-            )}
-          </div>
-          <div className={styles.AdminProductRowSingleElement}>
-            {" "}
-            <h3>Price:</h3>
+            <h3>Last Name:</h3>
             <input
-              value={price}
-              {...register("price", {
+              {...register("lastName", {
                 required: false,
               })}
+              value={lastName}
               onChange={(event) => {
                 setMain(event.target.value);
-                setPrice(event.target.value);
+                setLastName(event.target.value);
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.product.price}
-              type="number"
-              id="price"
-              autoFocus
-            ></input>
-          </div>
-          <div className={styles.AdminProductRowSingleElement}>
-            {" "}
-            <h3>Quantity:</h3>
-            <input
-              {...register("qty", {
-                required: false,
-              })}
-              value={qty}
-              onChange={(event) => {
-                setMain(event.target.value);
-                setQty(event.target.value);
-              }}
-              className={styles.LoginEmailInput}
-              placeholder={props.product.qty}
-              type="number"
-              id="qty"
-              autoFocus
-            ></input>
-          </div>
-          <div className={styles.AdminProductRowSingleElement}>
-            {" "}
-            <h3 for="category">Choose a category:</h3>
-            <input
-              {...register("category", {
-                required: false,
-              })}
-              value={category}
-              onChange={(event) => {
-                setMain(event.target.value);
-                setCategory(event.target.value);
-              }}
-              className={styles.LoginEmailInput}
-              placeholder={props.product.category}
+              placeholder={props.user.lastName}
               type="text"
-              id="category"
+              id="lastName"
               autoFocus
             ></input>
+          </div>
+
+          <div className={styles.AdminProductRowSingleElement}>
+            {" "}
+            <h3>Email:</h3>
+            <input
+              value={email}
+              {...register("email", {
+                required: false,
+              })}
+              onChange={(event) => {
+                setMain(event.target.value);
+                setEmail(event.target.value);
+              }}
+              className={styles.LoginEmailInput}
+              placeholder={props.user.email}
+              type="number"
+              id="email"
+              autoFocus
+            ></input>
+          </div>
+          <div className={styles.AdminProductRowSingleElement}>
+            {" "}
+            <h3>Address:</h3>
+            <input
+              {...register("address", {
+                required: false,
+              })}
+              value={address}
+              onChange={(event) => {
+                setMain(event.target.value);
+                setAddress(event.target.value);
+              }}
+              className={styles.LoginEmailInput}
+              placeholder={props.user.address}
+              type="text"
+              id="address"
+              autoFocus
+            ></input>
+          </div>
+          <div className={styles.AdminProductRowSingleElement}>
+            {" "}
+            <h3 for="category">Is admin:</h3>
+            <select
+              {...register("isAdmin", {
+                required: false,
+              })}
+              value={isAdmin}
+              onChange={(event) => {
+                setMain(event.target.value);
+                setIsAdmin(event.target.value);
+              }}
+              className={styles.LoginEmailInput}
+              placeholder={props.user.isAdmin}
+              type="text"
+              id="isAdmin"
+              autoFocus
+            >
+              <option value="">Select</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
+            </select>
           </div>
           {main.length === 0 ? (
             <button
@@ -222,4 +214,4 @@ const AdminProduct = (props) => {
   );
 };
 
-export default AdminProduct;
+export default AdminUser;

@@ -21,14 +21,8 @@
   align-items: baseline;
 }
 
-
-
-
-
-@media screen and (max-width: 590px){
-
-  .AdminProductRow{
-    width: 100%;
-  }
- 
+.AdminProductRowSingleElementIsAdmin {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
