@@ -44,14 +44,6 @@ const handler = async (req, res) => {
         return;
       }
 
-      //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
-      order.orderItems.map(async (product) => {
-        await Product.updateOne(
-          { _id: product.productId },
-          { $inc: { qty: -product.qty } }
-        );
-      });
-
       const newOrder = new Order({
         orderNumber: orderid.generate(),
         date: new Date().toISOString().split("T")[0],
@@ -82,6 +74,14 @@ const handler = async (req, res) => {
       });
 
       const order = await newOrder.save();
+
+      //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
+      order.orderItems.map(async (product) => {
+        await Product.updateOne(
+          { _id: product.productId },
+          { $inc: { qty: -product.qty } }
+        );
+      });
 
       db.disconnect();
 

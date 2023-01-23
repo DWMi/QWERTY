@@ -28,13 +28,13 @@ const AdminOrder = (props) => {
   const router = useRouter();
   const [main, setMain] = React.useState("");
 
-  const [isSent, setIsSent] = React.useState();
+  const [isSent, setIsSent] = React.useState("");
   console.log(props.order);
 
   useEffect(() => {
     //hello
     router.push("/admin/orders");
-    setIsSent();
+    setIsSent("");
     setMain("");
   }, []);
 
@@ -43,9 +43,9 @@ const AdminOrder = (props) => {
     try {
       const response = await axios.post("/api/admin/editOrder", {
         _id: props.order._id,
-        isSent: JSON.parse(isSent) || props.order.isSent,
+        isSent: isSent || props.order.isSent,
       });
-      setIsSent();
+      setIsSent("");
       setMain("");
       props.setOpen(false);
       router.push("/admin/orders");
@@ -100,7 +100,11 @@ const AdminOrder = (props) => {
               value={isSent}
               onChange={(event) => {
                 setMain(event.target.value);
-                setIsSent(event.target.value);
+                {
+                  event.target.value === "true"
+                    ? setIsSent(true)
+                    : setIsSent(false);
+                }
               }}
               className={styles.LoginEmailInput}
               placeholder={props.order.isSent}
@@ -109,8 +113,8 @@ const AdminOrder = (props) => {
               autoFocus
             >
               <option value="">Select</option>
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
           {main.length === 0 ? (

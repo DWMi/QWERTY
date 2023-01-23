@@ -30,7 +30,6 @@ const AdminUser = (props) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [main, setMain] = React.useState("");
-
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -44,7 +43,7 @@ const AdminUser = (props) => {
     setLastName("");
     setEmail("");
     setAddress("");
-    setIsAdmin();
+    setIsAdmin("");
     setMain("");
   }, []);
 
@@ -58,25 +57,25 @@ const AdminUser = (props) => {
     isAdmin,
   }) => {
     try {
+      props.setOpen(false);
       const response = await axios.post("/api/admin/editUser", {
         _id: props.user._id,
         firstName: firstName || props.user.firstName,
         lastName: lastName || props.user.lastName,
         email: email || props.user.email,
         address: address || props.user.address,
-        isAdmin: JSON.parse(isAdmin) || props.user.isAdmin,
+        isAdmin: isAdmin || props.user.isAdmin,
       });
       setFirstName("");
       setLastName("");
       setEmail("");
       setAddress("");
-      setIsAdmin();
+      setIsAdmin("");
       setMain("");
-      props.setOpen(false);
       router.push("/admin/users");
       console.log(response);
-    } catch (err) {
-      console.log(getError(err));
+    } catch (error) {
+      console.log(error.response.data);
     }
   };
   return (
@@ -182,7 +181,12 @@ const AdminUser = (props) => {
               value={isAdmin}
               onChange={(event) => {
                 setMain(event.target.value);
-                setIsAdmin(event.target.value);
+                console.log(event.target.value);
+                {
+                  event.target.value === "true"
+                    ? setIsAdmin(true)
+                    : setIsAdmin(false);
+                }
               }}
               className={styles.LoginEmailInput}
               placeholder={props.user.isAdmin}
@@ -190,9 +194,11 @@ const AdminUser = (props) => {
               id="isAdmin"
               autoFocus
             >
-              <option value="">Select</option>
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
+              <option value="" selected disabled hidden>
+                Select here
+              </option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
           {main.length === 0 ? (

@@ -23,8 +23,9 @@ async function handler(req, res) {
   });
   updateOrder.save();
   db.disconnect();
-  console.log(req.body);
-  res.json(req.body);
+  console.log(updateOrder);
+
+  res.send(updateOrder);
 
   /*  return res.status(200)({
     message: "User saved",

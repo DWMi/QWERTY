@@ -19,7 +19,7 @@ export default function successPage() {
   const URL = sessionId ? `/api/stripe/${sessionId}` : null;
   const { data, error } = useSWR(URL, fetcher);
 
-  console.log(data?.order)
+  console.log(data?.order);
 
   const { emptyCart } = useCart();
 
