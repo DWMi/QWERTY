@@ -20,3 +20,15 @@
   justify-content: flex-end;
   align-items: baseline;
 }
+
+
+
+
+
+@media screen and (max-width: 590px){
+
+  .AdminProductRow{
+    width: 100%;
+  }
+ 
+}

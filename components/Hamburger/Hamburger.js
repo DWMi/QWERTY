@@ -67,7 +67,7 @@ const HamburgerMenu = (props) => {
           </Link>
         )}
       </div>
-      <Link style={{ margin:'0', color: "#FFFFFF" }} href="/">CART ({props.totalCartItems})</Link>
+      <Link style={{ margin:'0', color: "#FFFFFF" }} href="/checkout">CART ({props.totalCartItems})</Link>
         </Menu>
         </div>
     </div>

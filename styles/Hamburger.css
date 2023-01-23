@@ -76,3 +76,11 @@
 
   }
 
+  @media screen and (max-width: 400px){
+
+    .bm-item-list a {
+      
+      font-size: 15px;
+    }
+
+  }
