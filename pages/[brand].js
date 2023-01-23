@@ -9,12 +9,12 @@ import Image from "next/image";
 import s from "../styles/Category.module.css";
 import BANNER from "../public/brandPic/landingBanner.png";
 import ProductCard from "../components/ProductCard/ProductCard";
+import { Abel } from "@next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 export default function BrandsPage({ products }) {
   const router = useRouter();
- 
 
   useEffect(() => {
     if (products.length == 0) {
@@ -33,7 +33,7 @@ export default function BrandsPage({ products }) {
 
       <div className={s.centerContainer}>
         <div className={s.bannerContainer}>
-          <Image src={BANNER} style={{height: '100%', objectFit: 'cover'}} />
+          <Image src={BANNER} style={{ height: "100%", objectFit: "cover" }} />
           <div className={s.bannerText}>
             <h1 className={s.headerText}>{router.query.brand}</h1>
           </div>
@@ -42,9 +42,7 @@ export default function BrandsPage({ products }) {
         <div className={s.container}>
           {products &&
             products.map((prod) => {
-              return (
-                <ProductCard prod={prod}/>
-              );
+              return <ProductCard prod={prod} />;
             })}
         </div>
       </div>

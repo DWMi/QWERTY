@@ -1,10 +1,11 @@
 import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import db from "../../../utils/db";
 import Order from "../../../models/Order";
 import Product from "../../../models/Product";
-const orderid = require("order-id")("key");
 import { getSession } from "next-auth/react";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const orderid = require("order-id")("key");
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
@@ -35,15 +36,21 @@ const handler = async (req, res) => {
         orderId: checkoutSession.id,
       });
       if (existingOrder) {
-        res
-          .status(422)
-          .json({
-            message: "Order already saved in database!",
-            order: existingOrder,
-          });
+        res.status(422).json({
+          message: "Order already saved in database!",
+          order: existingOrder,
+        });
         await db.disconnect();
         return;
       }
+
+      //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
+      order.orderItems.map(async (product) => {
+        await Product.updateOne(
+          { _id: product.productId },
+          { $inc: { qty: -product.qty } }
+        );
+      });
 
       const newOrder = new Order({
         orderNumber: orderid.generate(),
@@ -58,7 +65,7 @@ const handler = async (req, res) => {
             unit_price: item.price.unit_amount / 100,
             selectedSwitch: item.price.product.metadata.selectedSwitch,
             productId: item.price.product.metadata.id,
-            img: item.price.product.images[0]
+            img: item.price.product.images[0],
           };
         }),
         totalPrice: checkoutSession.amount_total / 100,
@@ -71,14 +78,11 @@ const handler = async (req, res) => {
           address: checkoutSession.customer_details.address,
           name: checkoutSession.customer_details.name,
         },
-        isSent: false
+        isSent: false,
       });
 
       const order = await newOrder.save();
-      //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
-      const products = order.orderItems.map( async (product) => {
-        await Product.updateOne({_id: product.productId }, {$inc: {qty: - product.qty}});
-    })
+
       db.disconnect();
 
       res.status(201).send({

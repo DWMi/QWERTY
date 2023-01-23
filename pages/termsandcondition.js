@@ -1,7 +1,11 @@
+import { Abel } from "@next/font/google";
+
+const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
+
 const tc = () => {
   return (
     <>
-      <div style={{padding:'40px', color: "black" }}>
+      <div style={{ padding: "40px", color: "black" }}>
         <h1 style={{ textAlign: "center" }}>
           Terms and Conditions for QWERTY{" "}
         </h1>
@@ -31,15 +35,17 @@ const tc = () => {
           materials (information or software) on QWERTY's online store for
           personal, non-commercial transitory viewing only. This is the grant of
           a license, not a transfer of title, and under this license, you may
-          not: <br/>a. modify or copy the materials; <br></br> b. use the materials for any
-          commercial purpose, or for any public display (commercial or
-          non-commercial); <br></br>c. attempt to decompile or reverse engineer any
-          software contained on QWERTY's online store; <br></br>d. remove any copyright
-          or other proprietary notations from the materials;  or <br/>e. transfer the
-          materials to another person or "mirror" the materials on any other
-          server. This license shall automatically terminate if you violate any
-          of these restrictions and may be terminated by QWERTY at any time.
-          Upon terminating your viewing of these materials or upon the
+          not: <br />
+          a. modify or copy the materials; <br></br> b. use the materials for
+          any commercial purpose, or for any public display (commercial or
+          non-commercial); <br></br>c. attempt to decompile or reverse engineer
+          any software contained on QWERTY's online store; <br></br>d. remove
+          any copyright or other proprietary notations from the materials; or{" "}
+          <br />
+          e. transfer the materials to another person or "mirror" the materials
+          on any other server. This license shall automatically terminate if you
+          violate any of these restrictions and may be terminated by QWERTY at
+          any time. Upon terminating your viewing of these materials or upon the
           termination of this license, you must destroy any downloaded materials
           in your possession whether in electronic or printed format.
         </p>
@@ -100,7 +106,13 @@ const tc = () => {
           contact us:
         </p>
         <ul>
-          <li >By email:<a style={{fontWeight:'bold'}} href='mailto:info@qwerty.com'> info@qwerty.com</a></li>
+          <li>
+            By email:
+            <a style={{ fontWeight: "bold" }} href="mailto:info@qwerty.com">
+              {" "}
+              info@qwerty.com
+            </a>
+          </li>
         </ul>
       </div>
     </>

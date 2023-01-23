@@ -13,6 +13,9 @@ import Product from "../models/Product";
 import Category from "../models/Category";
 import db from "../utils/db";
 import ProductCard from "../components/ProductCard/ProductCard";
+import { Abel } from "@next/font/google";
+
+const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 const Landing = ({ products, categories }) => {
   return (
