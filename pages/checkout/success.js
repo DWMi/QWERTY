@@ -14,11 +14,12 @@ import Paper from "@mui/material/Paper";
 
 export default function successPage() {
   const router = useRouter();
-  const sessionId = router.query.sessionId;
 
+  const sessionId = router.query.sessionId;
   const URL = sessionId ? `/api/stripe/${sessionId}` : null;
   const { data, error } = useSWR(URL, fetcher);
-  console.log(data?.order);
+
+  console.log(data?.order)
 
   const { emptyCart } = useCart();
 
@@ -98,8 +99,6 @@ export default function successPage() {
                     {data?.order.shipping_details?.country}{" "}
                   </p>
                 </TableCell>
-                
-             
               </TableRow>
             </TableBody>
           </Table>
