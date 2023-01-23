@@ -1,4 +1,4 @@
-export const categoryList = [
+/* export const categoryList = [
     {
         name: "Keyboards",
         brands: [
@@ -37,4 +37,4 @@ export const categoryList = [
             },
         ]
     }
-]
+] */
