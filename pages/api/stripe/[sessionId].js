@@ -2,15 +2,15 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import db from "../../../utils/db";
 import Order from "../../../models/Order";
-const orderid = require('order-id')('key');
-import { getSession } from 'next-auth/react';
-
+import Product from "../../../models/Product";
+const orderid = require("order-id")("key");
+import { getSession } from "next-auth/react";
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
     try {
       const sessionId = req.query.sessionId;
-      const userSession = await getSession({req})
+      const userSession = await getSession({ req });
 
       if (!sessionId.startsWith("cs_")) {
         throw Error("Incorrect checkout session ID!");
@@ -18,7 +18,11 @@ const handler = async (req, res) => {
       const checkoutSession = await stripe.checkout.sessions.retrieve(
         sessionId,
         {
-          expand: ["line_items.data.price.product", "customer"],
+          expand: [
+            "line_items.data.price.product",
+            "customer",
+            "shipping_cost.shipping_rate",
+          ],
         }
       );
 
@@ -31,7 +35,12 @@ const handler = async (req, res) => {
         orderId: checkoutSession.id,
       });
       if (existingOrder) {
-        res.status(422).json({ message: "Order already saved in database!", order: existingOrder });
+        res
+          .status(422)
+          .json({
+            message: "Order already saved in database!",
+            order: existingOrder,
+          });
         await db.disconnect();
         return;
       }
@@ -42,25 +51,34 @@ const handler = async (req, res) => {
         orderId: checkoutSession.id,
         userId: userSession.user._id,
         orderItems: checkoutSession.line_items.data.map((item) => {
-            return {
-                amount_total: item.amount_total / 100,
-                product_name: item.price.product.name,
-                qty: item.quantity,
-                unit_price: item.price.unit_amount / 100,
-                selectedSwitch: item.price.product.metadata.selectedSwitch
-            }
+          return {
+            amount_total: item.amount_total / 100,
+            product_name: item.price.product.name,
+            qty: item.quantity,
+            unit_price: item.price.unit_amount / 100,
+            selectedSwitch: item.price.product.metadata.selectedSwitch,
+            productId: item.price.product.metadata.id,
+            img: item.price.product.images[0]
+          };
         }),
         totalPrice: checkoutSession.amount_total / 100,
         shipping_details: checkoutSession.shipping_details.address,
-        customer_details: {
-            address: checkoutSession.customer_details.address,
-            name: checkoutSession.customer_details.name
+        delivery_options: {
+          name: checkoutSession.shipping_cost.shipping_rate.display_name,
+          price: checkoutSession.shipping_cost.amount_total / 100,
         },
-        isSent: false,
-
+        customer_details: {
+          address: checkoutSession.customer_details.address,
+          name: checkoutSession.customer_details.name,
+        },
+        isSent: false
       });
 
       const order = await newOrder.save();
+      //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
+      const products = order.orderItems.map( async (product) => {
+        await Product.updateOne({_id: product.productId }, {$inc: {qty: - product.qty}});
+    })
       db.disconnect();
 
       res.status(201).send({
